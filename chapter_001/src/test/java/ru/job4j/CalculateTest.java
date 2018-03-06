@@ -11,22 +11,22 @@ import static org.junit.Assert.assertThat;
  * @author Artur Glyzin
  * @since 04.03.2018
  * @version 1
-*/
+ */
 
-	public class CalculateTest {
-		
-		/**
-			Test echo
-		*/
-		@Test
-		public void whenTakeNameThenTreeEchoPlusName() {
-			String input = "Artur Glyzin";
-			String expect = "Echo, echo, echo : Artur Glyzin";
-			Calculate calc = new Calculate();
-			String result = calc.echo(input);
-			assertThat(result, is(expect));
-		}
-		
+public class CalculateTest {
+
+	/**
+	 Test echo
+	 */
+	@Test
+	public void whenTakeNameThenTreeEchoPlusName() {
+		String input = "Artur Glyzin";
+		String expect = "Echo, echo, echo : Artur Glyzin";
+		Calculate calc = new Calculate();
+		String result = calc.echo(input);
+		assertThat(result, is(expect));
 	}
+
+}
 	
 	
