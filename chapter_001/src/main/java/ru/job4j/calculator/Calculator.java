@@ -3,8 +3,8 @@ package ru.job4j.calculator;
 /**
  * class Calculator - для арифметических вычислений +,-,*,/.
  * @author Artur Glyzin.
- * @since 06.03.2018.
- * @version 1.0.
+ * @since 30.04.2018.
+ * @version 2.0.
  */
 
 public class Calculator {
