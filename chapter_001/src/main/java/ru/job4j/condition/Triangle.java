@@ -2,9 +2,10 @@ package ru.job4j.condition;
 
 /**
  * Программа для вычисления площади треугольника
+ *
  * @author Artur Glyzin.
- * @since 01.05.2018.
  * @version 1.0.
+ * @since 01.05.2018.
  */
 
 public class Triangle {
@@ -17,8 +18,9 @@ public class Triangle {
         this.b = b;
         this.c = c;
     }
+
     public double perimetr(double ab, double ac, double bc) {
-        return (ab + ac + bc)/2;
+        return (ab + ac + bc) / 2;
     }
 
     public double area() {
@@ -28,13 +30,15 @@ public class Triangle {
         double bc = b.distanceTo(c);
         double p = this.perimetr(ab, ac, bc);
         if (this.exist(ab, ac, bc)) {
-            rsl = Math.sqrt(p*(p-ab)*(p-ac)*(p-bc));
+            rsl = Math.sqrt(p * (p - ab) * (p - ac) * (p - bc));
         }
+        System.out.println(ab);
+        System.out.println(ac);
+        System.out.println(bc);
         return rsl;
     }
 
     private boolean exist(double ab, double ac, double bc) {
-        return ab+ac>bc||ab+bc>ac||ac+bc>ab;
+        return ab + ac > bc && ab + bc > ac && ac + bc > ab;
     }
-
 }
