@@ -10,7 +10,7 @@ import static org.junit.Assert.assertThat;
  *
  * @author Artur Glyzin.
  * @version 1.0.
- * @since 27.07.2018.
+ * @since 28.07.2018.
  */
 
 public class CheckTest {
