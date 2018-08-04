@@ -22,7 +22,7 @@ public class TrackerTest {
         Item item2 = new Item("test2", "testDescription2", 1234L);
         item2.setId(item1.getId());
         tracker.replace(item1.getId(), item2);
-        assertThat(tracker.findById(item1.getId()).getName(), is("test2"));
+        assertThat(tracker.findById(item2.getId()).getName(), is("test2"));
     }
 
     @Test
@@ -60,7 +60,7 @@ public class TrackerTest {
         tracker.add(item1);
         tracker.add(item2);
         Item[] result = tracker.findByName("item");
-        assertThat(result, is(new Item[]{item1, null}));
+        assertThat(result, is(new Item[]{item1}));
     }
 
     @Test

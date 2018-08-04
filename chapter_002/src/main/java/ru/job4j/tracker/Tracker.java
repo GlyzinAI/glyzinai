@@ -45,9 +45,11 @@ public class Tracker {
     }
 
     public void replace(String id, Item item) {
+        item.setId(generateId()); //установка id для передаваемой в метод заявки
         for (int i = 0; i < position; i++) {
             if (items[i].getId().equals(id)) {
                 items[i] = item;
+                break;
             }
         }
     }
@@ -61,6 +63,8 @@ public class Tracker {
         for (int i = 0; i < items.length; i++) {
             if (items[i] != null && items[i].getId().equals(id)) {
                 System.arraycopy(items, i + 1, items, i, items.length - i - 1);
+                position--;
+                break;
             }
         }
     }
@@ -72,13 +76,7 @@ public class Tracker {
      */
 
     public Item[] getAll() {
-        Item[] result = new Item[position];
-        for (int i = 0; i < position; i++) {
-            if (items[i] != null) {
-                result[i] = items[i];
-            }
-        }
-        return result;
+        return Arrays.copyOf(this.items, this.position);
     }
 
     /**
@@ -89,12 +87,14 @@ public class Tracker {
      */
     public Item[] findByName(String key) {
         Item[] result = new Item[position];
+        int k = 0;
         for (int i = 0; i < position; i++) {
             if (items[i].getName().equals(key)) {
-                result[i] = items[i];
+                result[k] = items[i];
+                break;
             }
         }
-        return result;
+        return Arrays.copyOf(result, 1);
     }
 
     /**
