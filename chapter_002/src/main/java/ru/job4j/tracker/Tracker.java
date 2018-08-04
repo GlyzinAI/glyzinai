@@ -45,7 +45,7 @@ public class Tracker {
     }
 
     public void replace(String id, Item item) {
-        item.setId(generateId()); //установка id для передаваемой в метод заявки
+        item.setId(id); //установка id для передаваемой в метод заявки
         for (int i = 0; i < position; i++) {
             if (items[i].getId().equals(id)) {
                 items[i] = item;
@@ -90,8 +90,7 @@ public class Tracker {
         int k = 0;
         for (int i = 0; i < position; i++) {
             if (items[i].getName().equals(key)) {
-                result[k] = items[i];
-                break;
+                result[k++] = items[i];
             }
         }
         return Arrays.copyOf(result, 1);
