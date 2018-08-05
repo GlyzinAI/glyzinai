@@ -83,7 +83,7 @@ public class Tracker {
      * Получения списка по имени
      *
      * @param key - название(name) заявки
-     * @return массив заявок
+     * @return double item массив заявок
      */
     public Item[] findByName(String key) {
         Item[] result = new Item[position];
