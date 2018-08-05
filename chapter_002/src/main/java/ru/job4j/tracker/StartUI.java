@@ -114,11 +114,15 @@ public class StartUI {
         System.out.println("--------- Поиск заявки по её ID ---------");
         String id = this.input.ask("Введите id заявки: ");
         Item res = tracker.findById(id);
-        System.out.println("--------- Заявка найдена ---------");
-        System.out.format("%16s%16s%16s", "Имя заявки", "Описание", "ID заявки");
-        System.out.println();
-        System.out.format("%16s%16s%16s", res.getName(), res.getDesc(), res.getId());
-        System.out.println();
+        if (res == null) {
+            System.out.println("--------- Заявка не найдена ---------");
+        } else {
+            System.out.println("--------- Заявка найдена ---------");
+            System.out.format("%16s%16s%16s", "Имя заявки", "Описание", "ID заявки");
+            System.out.println();
+            System.out.format("%16s%16s%16s", res.getName(), res.getDesc(), res.getId());
+            System.out.println();
+        }
     }
 
     /**
@@ -129,12 +133,16 @@ public class StartUI {
         System.out.println("--------- Поиск заявки по имени ---------");
         String name = this.input.ask("Введите имя заявки: ");
         Item[] res = tracker.findByName(name);
-        System.out.println("--------- Заявка найдена ---------");
-        System.out.format("%16s%16s%16s", "Имя заявки", "Описание", "ID заявки");
-        System.out.println();
-        for (Item item : res) {
-            System.out.format("%16s%16s%16s", item.getName(), item.getDesc(), item.getId());
+        if (res.length == 0) {
+            System.out.println("--------- Заявка не найдена ---------");
+        } else {
+            System.out.println("--------- Заявка найдена ---------");
+            System.out.format("%16s%16s%16s", "Имя заявки", "Описание", "ID заявки");
             System.out.println();
+            for (Item item : res) {
+                System.out.format("%16s%16s%16s", item.getName(), item.getDesc(), item.getId());
+                System.out.println();
+            }
         }
     }
 

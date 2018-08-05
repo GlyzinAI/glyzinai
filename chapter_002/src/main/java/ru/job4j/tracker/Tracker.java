@@ -83,17 +83,17 @@ public class Tracker {
      * Получения списка по имени
      *
      * @param key - название(name) заявки
-     * @return double item массив заявок
+     * @return item[] - массив заявок
      */
     public Item[] findByName(String key) {
         Item[] result = new Item[position];
         int k = 0;
         for (int i = 0; i < position; i++) {
-            if (items[i].getName().equals(key)) {
+            if (items[i] != null && items[i].getName().equals(key)) {
                 result[k++] = items[i];
             }
         }
-        return Arrays.copyOf(result, 1);
+        return Arrays.copyOf(result, k);
     }
 
     /**
