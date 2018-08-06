@@ -36,4 +36,23 @@ public class PaintTest {
         );
         System.setOut(stdout);
     }
+
+    @Test
+    public void drawTriangle() {
+        PrintStream stdout = System.out;
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(out));
+        new Paint().draw(new Triangle());
+        assertThat(
+                new String(out.toByteArray()),
+                is(
+                        new StringBuilder()
+                                .append("  ^  ")
+                                .append(" ^ ^ ")
+                                .append("^^^^^")
+                                .toString()
+                )
+        );
+        System.setOut(stdout);
+    }
 }
