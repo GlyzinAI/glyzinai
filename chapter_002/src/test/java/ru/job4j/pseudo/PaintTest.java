@@ -31,6 +31,7 @@ public class PaintTest {
                                 .append("+   +")
                                 .append("+   +")
                                 .append("++++")
+                                .append(System.lineSeparator())
                                 .toString()
                 )
         );
@@ -50,6 +51,7 @@ public class PaintTest {
                                 .append("  ^  ")
                                 .append(" ^ ^ ")
                                 .append("^^^^^")
+                                .append(System.lineSeparator())
                                 .toString()
                 )
         );
