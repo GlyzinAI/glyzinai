@@ -15,32 +15,23 @@ import static org.hamcrest.core.Is.is;
  *
  * @author Artur Glyzin.
  * @version 1.0.
- * @since 06.08.2018.
+ * @since 07.08.2018.
  */
 
 public class StartUITest {
 
     private final PrintStream stdout = System.out;
     private final ByteArrayOutputStream out = new ByteArrayOutputStream();
-
+    String ls = System.lineSeparator();
     StringBuilder menu = new StringBuilder()
-            .append("Меню")
-            .append(System.lineSeparator())
-            .append("0. Add new Item")
-            .append(System.lineSeparator())
-            .append("1. Show all items")
-            .append(System.lineSeparator())
-            .append("2. Edit item")
-            .append(System.lineSeparator())
-            .append("3. Delete item")
-            .append(System.lineSeparator())
-            .append("4. Find item by Id")
-            .append(System.lineSeparator())
-            .append("5. Find items by name")
-            .append(System.lineSeparator())
-            .append("6. Exit Program")
-            .append(System.lineSeparator());
-
+            .append("Меню").append(ls)
+            .append("0. Add new Item").append(ls)
+            .append("1. Show all items").append(ls)
+            .append("2. Edit item").append(ls)
+            .append("3. Delete item").append(ls)
+            .append("4. Find item by Id").append(ls)
+            .append("5. Find items by name").append(ls)
+            .append("6. Exit Program").append(ls);
 
     @Before
     public void loadOutput() {
@@ -98,16 +89,32 @@ public class StartUITest {
         assertThat(new String(out.toByteArray()), is(
                 new StringBuilder()
                         .append(menu)
-                        .append("--------- Список всех заявок ---------")
-                        .append(System.lineSeparator())
-                        .append(String.format("%16s%16s%16s", "Имя заявки", "Описание", "ID заявки"))
-                        .append(System.lineSeparator())
-                        .append(String.format("%16s%16s%16s", item1.getName(), item1.getDesc(), item1.getId()))
-                        .append(System.lineSeparator())
-                        .append(String.format("%16s%16s%16s", item2.getName(), item2.getDesc(), item2.getId()))
-                        .append(System.lineSeparator())
-                        .append(menu)
+                        .append("--------- Список всех заявок ---------").append(ls)
+                        .append(String.format("%16s%16s%16s", "Имя заявки", "Описание", "ID заявки")).append(ls)
+                        .append(String.format("%16s%16s%16s", item1.getName(), item1.getDesc(), item1.getId())).append(ls)
+                        .append(String.format("%16s%16s%16s", item2.getName(), item2.getDesc(), item2.getId())).append(ls)
+                        .append(menu).toString()
 
         ));
     }
+
+    @Test
+    public void findID() {
+        Tracker tracker = new Tracker();
+        Item item = new Item("task#1", "desc#1");
+        tracker.add(item);
+        Input input = new StubInput(new String[]{"4", item.getId(), "6", "y"});
+        new StartUI(input, tracker).init();
+        assertThat(new String(out.toByteArray()),
+                is(
+                        new StringBuilder()
+                                .append(menu)
+                                .append("--------- Поиск заявки по её ID ---------").append(ls)
+                                .append("--------- Заявка найдена ---------").append(ls)
+                                .append(String.format("%16s%16s%16s", "Имя заявки", "Описание", "ID заявки")).append(ls)
+                                .append(String.format("%16s%16s%16s", item.getName(), item.getDesc(), item.getId())).append(ls)
+                                .append(menu).toString()
+                ));
+    }
+
 }
