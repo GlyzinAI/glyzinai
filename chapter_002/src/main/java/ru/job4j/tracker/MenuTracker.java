@@ -61,9 +61,15 @@ public class MenuTracker {
         this.actions.add(new Exit(6, "Exit Program"));
     }
 
-    public void allActions(List<Integer> range) {
+    /*public void allActions(List<Integer> range) {
         for (int i = 0; i < getActionsLength(); i++) {
             range.add(i);
+        }
+    }*/
+
+    public void allActions(List<Integer> range) {
+        for (UserAction action : actions) {
+            range.add(action.key());
         }
     }
 
@@ -311,7 +317,12 @@ public class MenuTracker {
      */
 
     public void select(int key) {
-        this.actions.get(key).execute(this.input, this.tracker);
+
+        for (UserAction action : actions) {
+            if (action.key() == key) {
+                action.execute(this.input, this.tracker);
+            }
+        }
     }
 
     /**
