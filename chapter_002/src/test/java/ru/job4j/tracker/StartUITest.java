@@ -6,6 +6,9 @@ import org.junit.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 import static org.junit.Assert.assertThat;
 import static org.hamcrest.core.Is.is;
@@ -14,8 +17,8 @@ import static org.hamcrest.core.Is.is;
  * StartUITest - тест класс для проверки поведения пользователя.
  *
  * @author Artur Glyzin.
- * @version 1.0.
- * @since 07.08.2018.
+ * @version 2.0.
+ * @since 10.08.2018.
  */
 
 public class StartUITest {
@@ -24,7 +27,6 @@ public class StartUITest {
     private final ByteArrayOutputStream out = new ByteArrayOutputStream();
     String ls = System.lineSeparator();
     StringBuilder menu = new StringBuilder()
-            .append("Меню").append(ls)
             .append("0. Add new Item").append(ls)
             .append("1. Show all items").append(ls)
             .append("2. Edit item").append(ls)
@@ -51,7 +53,8 @@ public class StartUITest {
     @Test
     public void addItem() {
         Tracker tracker = new Tracker();
-        Input input = new StubInput(new String[]{"0", "test name", "desc", "6", "y"});
+        Input input = new StubInput(new String[]{"0", "test name", "desc", "y"});
+
         new StartUI(input, tracker).init();
         assertThat(tracker.getAll()[0].getName(), is("test name"));
     }
@@ -60,7 +63,9 @@ public class StartUITest {
     public void editItem() {
         Tracker tracker = new Tracker();
         Item item = tracker.add(new Item("task#1", "desc#1"));
-        Input input = new StubInput(new String[]{"2", item.getId(), "newTask", "newDesc", "6", "y"});
+        Input input = new StubInput(new String[]{"2", item.getId(), "newTask", "newDesc", "y"});
+        //Input input = new StubInput(new LinkedList<>());
+
         new StartUI(input, tracker).init();
         assertThat(tracker.findById(item.getId()).getName(), is("newTask"));
     }
@@ -70,7 +75,7 @@ public class StartUITest {
         Tracker tracker = new Tracker();
         Item item1 = tracker.add(new Item("task#1", "desc#1"));
         Item item2 = tracker.add(new Item("task#2", "desc#2"));
-        Input input = new StubInput(new String[]{"3", item2.getId(), "6", "y"});
+        Input input = new StubInput(new String[]{"3", item2.getId(), "y"});
         new StartUI(input, tracker).init();
         Item[] itemResult = {item1};
         assertThat(tracker.getAll(), is(itemResult));
@@ -83,7 +88,7 @@ public class StartUITest {
         Item item2 = new Item("task#2", "desc#2");
         tracker.add(item1);
         tracker.add(item2);
-        Input input = new StubInput(new String[]{"1", "6", "y"});
+        Input input = new StubInput(new String[]{"1", "y"});
         new StartUI(input, tracker).init();
 
         assertThat(new String(out.toByteArray()), is(
@@ -93,7 +98,7 @@ public class StartUITest {
                         .append(String.format("%16s%16s%16s", "Имя заявки", "Описание", "ID заявки")).append(ls)
                         .append(String.format("%16s%16s%16s", item1.getName(), item1.getDesc(), item1.getId())).append(ls)
                         .append(String.format("%16s%16s%16s", item2.getName(), item2.getDesc(), item2.getId())).append(ls)
-                        .append(menu).toString()
+                        .toString()
 
         ));
     }
@@ -103,7 +108,7 @@ public class StartUITest {
         Tracker tracker = new Tracker();
         Item item = new Item("task#1", "desc#1");
         tracker.add(item);
-        Input input = new StubInput(new String[]{"4", item.getId(), "6", "y"});
+        Input input = new StubInput(new String[]{"4", item.getId(), "y"});
         new StartUI(input, tracker).init();
         assertThat(new String(out.toByteArray()),
                 is(
@@ -113,7 +118,7 @@ public class StartUITest {
                                 .append("--------- Заявка найдена ---------").append(ls)
                                 .append(String.format("%16s%16s%16s", "Имя заявки", "Описание", "ID заявки")).append(ls)
                                 .append(String.format("%16s%16s%16s", item.getName(), item.getDesc(), item.getId())).append(ls)
-                                .append(menu).toString()
+                                .toString()
                 ));
     }
 

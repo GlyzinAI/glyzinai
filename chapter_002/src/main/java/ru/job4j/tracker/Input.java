@@ -6,8 +6,8 @@ import java.util.List;
  * Interface Input.
  *
  * @author Artur Glyzin.
- * @version 1.0.
- * @since 08.08.2018.
+ * @version 2.0.
+ * @since 10.08.2018.
  */
 
 public interface Input {

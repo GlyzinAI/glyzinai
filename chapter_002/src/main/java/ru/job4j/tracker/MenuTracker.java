@@ -7,8 +7,8 @@ import java.util.List;
  * MenuTracker.
  *
  * @author Artur Glyzin.
- * @version 1.0.
- * @since 08.08.2018.
+ * @version 2.0.
+ * @since 10.08.2018.
  */
 
 public class MenuTracker {
@@ -59,6 +59,12 @@ public class MenuTracker {
         this.actions.add(new FindItemById(4, "Find item by Id"));
         this.actions.add(new FindItemByName(5, "Find items by name"));
         this.actions.add(new Exit(6, "Exit Program"));
+    }
+
+    public void allActions(List<Integer> range) {
+        for (int i = 0; i < getActionsLength(); i++) {
+            range.add(i);
+        }
     }
 
     public static class AddAction implements UserAction {
@@ -218,7 +224,7 @@ public class MenuTracker {
             if (res == null) {
                 System.out.println("-------- Заявка не найдена --------");
             } else {
-                System.out.println("-------- Заявка найдена --------");
+                System.out.println("--------- Заявка найдена ---------");
                 System.out.format("%16s%16s%16s", "Имя заявки", "Описание", "ID заявки");
                 System.out.println();
                 System.out.format("%16s%16s%16s", res.getName(), res.getDesc(), res.getId());

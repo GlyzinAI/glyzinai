@@ -7,8 +7,8 @@ import java.util.Scanner;
  * ConsoleInput - класс отвечает за ввод данных пользователем.
  *
  * @author Artur Glyzin.
- * @version 1.0.
- * @since 05.08.2018.
+ * @version 2.0.
+ * @since 10.08.2018.
  */
 
 public class ConsoleInput implements Input {

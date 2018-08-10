@@ -7,8 +7,8 @@ import java.util.List;
  * StartUI.
  *
  * @author Artur Glyzin.
- * @version 1.0.
- * @since 08.08.2018.
+ * @version 2.0.
+ * @since 10.08.2018.
  */
 
 public class StartUI {
@@ -30,9 +30,7 @@ public class StartUI {
         MenuTracker menu = new MenuTracker(this.input, this.tracker);
         List<Integer> range = new ArrayList<>();
         menu.fillActions();
-        for (int i = 0; i < menu.getActionsLength(); i++) {
-            range.add(i);
-        }
+        menu.allActions(range);
         do {
             menu.show();
             menu.select(input.ask("select:", range));

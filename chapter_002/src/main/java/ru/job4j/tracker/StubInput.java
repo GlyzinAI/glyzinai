@@ -6,8 +6,8 @@ import java.util.List;
  * StubInput - ввод пользовательских данных. Используется массив с готовыми ответами пользователя.
  *
  * @author Artur Glyzin.
- * @version 1.0.
- * @since 08.08.2018.
+ * @version 2.0.
+ * @since 10.08.2018.
  */
 
 public class StubInput implements Input {
@@ -18,12 +18,14 @@ public class StubInput implements Input {
         this.answers = answers;
     }
 
+
     public String ask(String question) {
         return answers[position++];
     }
 
     @Override
     public int ask(String question, List<Integer> range) {
-        return 0;
+        return Integer.valueOf(answers[position++]);
     }
+
 }
