@@ -7,8 +7,8 @@ import java.util.Scanner;
  * ConsoleInput - класс отвечает за ввод данных пользователем.
  *
  * @author Artur Glyzin.
- * @version 2.0.
- * @since 10.08.2018.
+ * @version 3.0.
+ * @since 11.08.2018.
  */
 
 public class ConsoleInput implements Input {
@@ -22,6 +22,17 @@ public class ConsoleInput implements Input {
     @Override
     public int ask(String question, List<Integer> range) {
         int key = Integer.valueOf(this.ask(question));
-        return key;
+        boolean exist = false;
+        for (int value : range) {
+            if (value == key) {
+                exist = true;
+                break;
+            }
+        }
+        if (exist) {
+            return key;
+        } else {
+            throw new MenuOutException("out of menu range.");
+        }
     }
 }

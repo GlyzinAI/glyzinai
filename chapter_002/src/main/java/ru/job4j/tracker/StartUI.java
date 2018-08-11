@@ -7,8 +7,8 @@ import java.util.List;
  * StartUI.
  *
  * @author Artur Glyzin.
- * @version 2.0.
- * @since 10.08.2018.
+ * @version 3.0.
+ * @since 11.08.2018.
  */
 
 public class StartUI {
@@ -38,7 +38,7 @@ public class StartUI {
     }
 
     public static void main(String[] args) {
-        new StartUI(new ConsoleInput(), new Tracker()).init();
+        new StartUI(new ValidateInput(), new Tracker()).init();
     }
 
 }
