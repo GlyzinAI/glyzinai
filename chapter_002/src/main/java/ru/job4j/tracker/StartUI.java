@@ -7,11 +7,13 @@ import java.util.List;
  * StartUI.
  *
  * @author Artur Glyzin.
- * @version 3.0.
- * @since 11.08.2018.
+ * @version 4.0.
+ * @since 12.08.2018.
  */
 
 public class StartUI {
+
+    private boolean working = true;
 
     private final Input input;
 
@@ -29,12 +31,16 @@ public class StartUI {
     public void init() {
         MenuTracker menu = new MenuTracker(this.input, this.tracker);
         List<Integer> range = new ArrayList<>();
-        menu.fillActions();
+        menu.fillActions(this);
         menu.allActions(range);
         do {
             menu.show();
             menu.select(input.ask("select:", range));
-        } while (!"y".equals(this.input.ask("Exit?(y): ")));
+        } while (this.working);
+    }
+
+    public void stop() {
+        this.working = false;
     }
 
     public static void main(String[] args) {
