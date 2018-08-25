@@ -1,38 +1,51 @@
 package ru.job4j.hero;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 public class Banda implements Team {
     ArrayList<BaseHero> list;
-    ArrayList<BaseHero> privegi = new StartGame().priv;
-
 
     public Banda(ArrayList<BaseHero> list) {
         this.list = list;
     }
 
     @Override
-    public boolean aliveTeam() {
-        boolean alive = true;
+    public void alive() {
         for (int i = 0; i < list.size(); i++) {
-            if (!list.get(i).alive())
-                alive = false;
+            if (!(list.get(i).alive())) {
+                System.out.println(list.get(i).getName() + " погибает †");
+                list.remove(i);
+            }
         }
-        return alive;
     }
-
 
     @Override
-    public BaseHero turn() {
-        if (privegi.isEmpty()){
-            Random rn = new Random();
-            int index = rn.nextInt(list.size());
-            BaseHero hero = list.get(index);
-            return hero;
-        }
-        else
-            return privegi.get(0);
+    public boolean aliveTeam() {
+        if (list.isEmpty()) return false;
+        else return true;
     }
 
+    @Override
+    public void survivor() {
+        if (!list.isEmpty()) System.out.println("Победила команда " + list.get(0).getNameTeam());
+        System.out.println("Выжившие герои:");
+        for (int i = 0; i < list.size(); i++) {
+            System.out.println(list.get(i).getName() + " XP:" + list.get(i).getHp());
+        }
+    }
+
+    @Override
+    public BaseHero turn(ArrayList<BaseHero> priv) {
+        if (priv.isEmpty()) {
+            return new Randomit().rmTurn(list);
+        } else return new Randomit().rmTurn(priv);
+    }
+
+    @Override
+    public int lenghtList() {
+        return list.size();
+    }
+
+
 }
+

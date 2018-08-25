@@ -1,22 +1,30 @@
 package ru.job4j.hero.ork;
 
 import ru.job4j.hero.BaseHero;
+import ru.job4j.hero.Randomit;
+import ru.job4j.hero.Weapon;
 
 import java.util.Random;
 
 public class ShamanOrk extends BaseHero {
-    public ShamanOrk(String name, int hit, String weapon) {
-        super(name, hit, weapon);
+
+    private Weapon[] weapons = {new Weapon("накладывает улучшение на", 0), new Weapon("наложение проклятия на", 0)};
+
+    private Weapon weapon = new Randomit().selectWeapon(weapons);
+
+    public ShamanOrk() {
+        super("Орки| Шаман Орк","Орки");
+        setHit(weapon.hit);
+        setWeapon(weapon);
+    }
+
+    @Override
+    public String nameWeapon() {
+        return weapon.nameWeapon;
     }
 
     @Override
     public boolean actionToTeam() {
-        boolean k = false;
-        Random rn = new Random();
-        int count = rn.nextInt(2);
-        if (count == 0) {
-            return k = true;
-        }
-        return k;
+        return true;
     }
 }

@@ -11,13 +11,18 @@ import java.util.ArrayList;
 public class StartGame {
     private Team first;
     private Team second;
+    ArrayList<BaseHero> privilegedTeamOne = new ArrayList<>();
+    ArrayList<BaseHero> privilegedTeamTwo = new ArrayList<>();
 
-    ArrayList<BaseHero> priv = new ArrayList<>();
+
 
     public void init() {
 
+        // System.setOut(new PrintStream(new FileOutputStream("D:\\output5.txt")));
+
 
         int count = 1;
+
 
         ArrayList<BaseHero> elf = new AllElf().elf();
         ArrayList<BaseHero> ork = new AllOrk().ork();
@@ -25,16 +30,13 @@ public class StartGame {
         ArrayList<BaseHero> undead = new AllUndead().undead();
 
 
-
-        Team first = new Banda(elf);
-        Team second = new Banda(ork);
+        Team first = new Banda(people);
+        Team second = new Banda(undead);
 
 
         boolean turn = true;
         System.out.println("------------- Start game --------------");
-        /*BaseHero first = new StartGame().generateFirst(hero1, hero2);
-        BaseHero second;*/
-        // System.out.println("Первым ход делает - " + first. + "!");
+
         System.out.println("Да начнется битва!!!");
         System.out.println();
 
@@ -42,22 +44,37 @@ public class StartGame {
         do {
 
             System.out.println("-------------- " + count + "-й ход --------------");
-            BaseHero master = turn ? first.turn() : second.turn();
-            if (master.actionToTeam()) {
-                BaseHero partner = turn ? first.turn() : second.turn();
+            BaseHero master = turn ? first.turn(privilegedTeamOne) : second.turn(privilegedTeamTwo);
+            if (master.actionToTeam() && first.lenghtList() > 1 && second.lenghtList() > 1) {
+                BaseHero partner = null;
+                do {
+                    partner = turn ? first.turn(privilegedTeamOne) : second.turn(privilegedTeamTwo);
+                }while (master.equals(partner));
+
                 master.upgrade(partner);
-                priv.add(partner);
-                System.out.println(master.getName() + " накладвает улучшение на " +  partner.getName());
+                if (turn) privilegedTeamOne.add(partner);
+                else privilegedTeamTwo.add(partner);
+                System.out.println(master.getName() + " " + master.nameWeapon() + " " + partner.getName());
                 System.out.println(partner.getName() + " переведен в привилегировнную группу");
+
+
             } else {
-                BaseHero caller = !turn ? first.turn() : second.turn();
+
+                BaseHero caller = !turn ? first.turn(privilegedTeamOne) : second.turn(privilegedTeamTwo);
 
                 master.attack(caller);
 
-                System.out.println(master.getName() + master.getWeapon() + " - " + caller.getName() + ", и наносит  УРОН - " + "❤" + master.getHit());
-            }
-            turn = !turn;
 
+                master.setPrivelege(false);
+                if (turn) privilegedTeamOne.remove(master);
+                else privilegedTeamTwo.remove(master);
+
+                System.out.println(master.getName() + " " + master.nameWeapon() + " - " + caller.getName() + ", и наносит  УРОН - " + master.getHit() + "❤");
+            }
+
+            first.alive();
+            second.alive();
+            turn = !turn;
             count++;
 
 
@@ -66,17 +83,16 @@ public class StartGame {
         System.out.println("-----------------");
 
         if (!first.aliveTeam()) {
-            System.out.println("Победил отряд Орков!" );
+            second.survivor();
+        } else {
+            first.survivor();
         }
-
-        else
-            System.out.println("Победил отряд эльфов!");
-
 
 
     }
 
     public static void main(String[] args) {
         new StartGame().init();
+
     }
 }

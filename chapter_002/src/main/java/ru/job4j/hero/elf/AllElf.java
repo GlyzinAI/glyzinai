@@ -1,5 +1,6 @@
 package ru.job4j.hero.elf;
 
+import ru.job4j.hero.Banda;
 import ru.job4j.hero.BaseHero;
 
 import java.util.ArrayList;
@@ -7,14 +8,14 @@ import java.util.ArrayList;
 public class AllElf {
     public ArrayList<BaseHero> elf() {
         ArrayList<BaseHero> elf = new ArrayList<>();
-        elf.add(new ArcherElf("Лучник Эльф", 7, " стреляяет из лука"));
-        elf.add(new ArcherElf("Лучник Эльф", 7, " стреляяет из лука"));
-        elf.add(new ArcherElf("Лучник Эльф", 7, " стреляяет из лука"));
-        elf.add(new WarriorElf("Воин Эльф", 15, " атакует мечом"));
-        elf.add(new WarriorElf("Воин Эльф", 15, " атакует мечом"));
-        elf.add(new WarriorElf("Воин Эльф", 15, " атакует мечом"));
-        elf.add(new WarriorElf("Воин Эльф", 15, " атакует мечом"));
-        elf.add(new MagElf("Маг Эльф", 20, " атакует магией"));
+        elf.add(new ArcherElf());
+       // elf.add(new ArcherElf());
+        //elf.add(new ArcherElf());
+        elf.add(new WarriorElf());
+      //  elf.add(new WarriorElf());
+       // elf.add(new WarriorElf());
+       // elf.add(new WarriorElf());
+        elf.add(new MagElf());
 
         return elf;
     }

@@ -1,40 +1,56 @@
 package ru.job4j.hero;
 
 public class BaseHero implements Hero {
+
+
     private String name;
     private int hp = 100;
     private int hit;
-    private String weapon;
+    private String nameTeam;
     public boolean privelege = false;
+
+    private Weapon weapon;
+
+    public void setWeapon(Weapon weapon) {
+        this.weapon = weapon;
+    }
 
     public void setPrivelege(boolean privelege) {
         this.privelege = privelege;
-    }
-
-    public boolean isPrivelege() {
-        return privelege;
-    }
-
-    public String getWeapon() {
-        return weapon;
-    }
-
-    public String getName() {
-        return name;
     }
 
     public int getHit() {
         return hit;
     }
 
+    public BaseHero() {
+    }
+
+    public String getNameTeam() {
+        return nameTeam;
+    }
+
+
+    public String getName() {
+        return name;
+    }
+
+
+    public void setHit(int hit) {
+        this.hit = hit;
+    }
+
+    public String nameWeapon() {
+        return "Описание атаки";
+    }
+
     public int getHp() {
         return hp;
     }
 
-    public BaseHero(String name, int hit, String weapon) {
+    public BaseHero(String name, String nameTeam) {
         this.name = name;
-        this.hit = hit;
-        this.weapon = weapon;
+        this.nameTeam = nameTeam;
     }
 
     @Override
@@ -54,7 +70,7 @@ public class BaseHero implements Hero {
 
     @Override
     public boolean alive() {
-        return hp >= 0;
+        return hp > 0;
     }
 
     @Override
