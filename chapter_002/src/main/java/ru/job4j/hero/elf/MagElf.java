@@ -6,25 +6,35 @@ import ru.job4j.hero.Weapon;
 
 import java.util.Random;
 
-public class MagElf extends BaseHero {
-    private final Weapon[] weapons = {new Weapon("накладывает улучшения", 0), new Weapon("атакует магией", 10)};
+/**
+ * Class MagElf.
+ *
+ * @author Artur Glyzin.
+ * @version 1.0.
+ * @since 31.08.2018.
+ */
 
-    private Weapon weapon = new Randomit().selectWeapon(weapons);
+public class MagElf extends BaseHero {
+    private final Weapon[] weapons = {new Weapon("накладывает улучшения"), new Weapon("атакует магией", 10.0)};
 
     public MagElf() {
-        super("Эльфы | Маг Эльф","Эльфы");
-        setHit(weapon.hit);
-        setWeapon(weapon);
+        super("Эльфы| Маг Эльф", "Эльфы");
+        setWeapons(weapons);
     }
 
     @Override
     public String nameWeapon() {
-        return weapon.nameWeapon;
+        return getWeapon().getNameWeapon();
     }
 
     @Override
     public boolean actionToTeam() {
-        if (weapon.hit == 0) return true;
+        if (getWeapon().getHit() == 0) return true;
         else return false;
+    }
+
+    public void editWeapon() {
+        setWeapon(weapons[1]);
+        setHit(getWeapon().getHit());
     }
 }

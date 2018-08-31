@@ -2,10 +2,19 @@ package ru.job4j.hero;
 
 import java.util.ArrayList;
 
+/**
+ * Interface Team.
+ *
+ * @author Artur Glyzin.
+ * @version 1.0.
+ * @since 31.08.2018.
+ */
+
 public interface Team {
 
     boolean aliveTeam();
-    BaseHero turn(ArrayList<BaseHero> priv);
+
+    BaseHero turn();
 
     void alive();
 
@@ -13,6 +22,7 @@ public interface Team {
 
     int lenghtList();
 
+    ArrayList<BaseHero> getPrivilegedTeam();
 
-
+    BaseHero turnPartner();
 }

@@ -2,8 +2,21 @@ package ru.job4j.hero;
 
 import java.util.ArrayList;
 
+/**
+ * Class Banda.
+ *
+ * @author Artur Glyzin.
+ * @version 1.0.
+ * @since 31.08.2018.
+ */
+
 public class Banda implements Team {
-    ArrayList<BaseHero> list;
+    private ArrayList<BaseHero> list;
+    private ArrayList<BaseHero> privilegedTeam = new ArrayList<>();
+
+    public ArrayList<BaseHero> getPrivilegedTeam() {
+        return privilegedTeam;
+    }
 
     public Banda(ArrayList<BaseHero> list) {
         this.list = list;
@@ -15,8 +28,12 @@ public class Banda implements Team {
             if (!(list.get(i).alive())) {
                 System.out.println(list.get(i).getName() + " погибает †");
                 list.remove(i);
+                privilegedTeam.clear();
             }
         }
+    }
+
+    public Banda() {
     }
 
     @Override
@@ -35,17 +52,26 @@ public class Banda implements Team {
     }
 
     @Override
-    public BaseHero turn(ArrayList<BaseHero> priv) {
-        if (priv.isEmpty()) {
+    public BaseHero turn() {
+        if (privilegedTeam.isEmpty()) {
             return new Randomit().rmTurn(list);
-        } else return new Randomit().rmTurn(priv);
+        } else return new Randomit().rmTurn(privilegedTeam);
+    }
+
+    @Override
+    public BaseHero turnPartner() {
+        if (privilegedTeam.isEmpty()) {
+            return new Randomit().rmTurnPartner(list);
+        } else return new Randomit().rmTurnPartner(privilegedTeam);
+    }
+
+    public void clList() {
+        privilegedTeam.clear();
     }
 
     @Override
     public int lenghtList() {
         return list.size();
     }
-
-
 }
 

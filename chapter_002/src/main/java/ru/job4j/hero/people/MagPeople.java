@@ -4,25 +4,36 @@ import ru.job4j.hero.BaseHero;
 import ru.job4j.hero.Randomit;
 import ru.job4j.hero.Weapon;
 
-public class MagPeople extends BaseHero {
-    private Weapon[] weapons = {new Weapon("наложение улучшения", 0), new Weapon("атакует магией", 4)};
+/**
+ * Class MagPeople.
+ *
+ * @author Artur Glyzin.
+ * @version 1.0.
+ * @since 31.08.2018.
+ */
 
-    private Weapon weapon = new Randomit().selectWeapon(weapons);
+
+public class MagPeople extends BaseHero {
+    private Weapon[] weapons = {new Weapon("накладывает улучшение"), new Weapon("атакует магией", 4.0)};
 
     public MagPeople() {
-        super("Люди| Маг Человек","Люди");
-        setHit(weapon.hit);
-        setWeapon(weapon);
+        super("Люди| Маг Человек", "Люди");
+        setWeapons(weapons);
     }
 
     @Override
     public String nameWeapon() {
-        return weapon.nameWeapon;
+        return getWeapon().getNameWeapon();
     }
 
     @Override
     public boolean actionToTeam() {
-        if (weapon.hit == 0) return true;
+        if (getWeapon().getHit() == 0) return true;
         else return false;
+    }
+
+    public void editWeapon() {
+        setWeapon(weapons[1]);
+        setHit(getWeapon().getHit());
     }
 }

@@ -1,17 +1,31 @@
 package ru.job4j.hero;
 
+/**
+ * Class BaseHero.
+ *
+ * @author Artur Glyzin.
+ * @version 1.0.
+ * @since 31.08.2018.
+ */
+
 public class BaseHero implements Hero {
 
 
     private String name;
-    private int hp = 100;
-    private int hit;
     private String nameTeam;
-    public boolean privelege = false;
+    private int hp = 100;
+    private double hit;
+    private boolean privelege = false;
+    private boolean nedug = false;
 
     private Weapon weapon;
+    private Weapon[] weapons;
 
     public void setWeapon(Weapon weapon) {
+        this.weapon = weapon;
+    }
+
+    public BaseHero(Weapon weapon) {
         this.weapon = weapon;
     }
 
@@ -19,8 +33,11 @@ public class BaseHero implements Hero {
         this.privelege = privelege;
     }
 
-    public int getHit() {
+    public double getHit() {
         return hit;
+    }
+
+    public void editWeapon() {
     }
 
     public BaseHero() {
@@ -30,13 +47,11 @@ public class BaseHero implements Hero {
         return nameTeam;
     }
 
-
     public String getName() {
         return name;
     }
 
-
-    public void setHit(int hit) {
+    public void setHit(double hit) {
         this.hit = hit;
     }
 
@@ -55,7 +70,7 @@ public class BaseHero implements Hero {
 
     @Override
     public void attack(Hero evil) {
-        evil.reduse((this.privelege ? 2 : 1) * this.hit);
+        evil.reduse((this.privelege ? 1.5 : 1) * this.hit);
     }
 
     @Override
@@ -64,7 +79,7 @@ public class BaseHero implements Hero {
     }
 
     @Override
-    public void reduse(int value) {
+    public void reduse(double value) {
         hp -= value;
     }
 
@@ -81,5 +96,29 @@ public class BaseHero implements Hero {
     @Override
     public void skills(boolean up) {
         this.privelege = up;
+    }
+
+    public Weapon getWeapon() {
+        return weapon;
+    }
+
+    public Weapon[] getWeapons() {
+        return weapons;
+    }
+
+    public void setWeapons(Weapon[] weapons) {
+        this.weapons = weapons;
+    }
+
+    public boolean isPrivelege() {
+        return privelege;
+    }
+
+    public boolean isNedug() {
+        return nedug;
+    }
+
+    public void setNedug(boolean nedug) {
+        this.nedug = nedug;
     }
 }

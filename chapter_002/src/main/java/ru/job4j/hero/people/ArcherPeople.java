@@ -4,20 +4,25 @@ import ru.job4j.hero.BaseHero;
 import ru.job4j.hero.Randomit;
 import ru.job4j.hero.Weapon;
 
-public class ArcherPeople extends BaseHero {
-    public Weapon[] weapons = {new Weapon("стреляет из арбалета", 5), new Weapon("атакует", 3)};
+/**
+ * Class ArcherPeople.
+ *
+ * @author Artur Glyzin.
+ * @version 1.0.
+ * @since 31.08.2018.
+ */
 
-    public Weapon weapon = new Randomit().selectWeapon(weapons);
+public class ArcherPeople extends BaseHero {
+    private Weapon[] weapons = {new Weapon("стреляет из арбалета", 5.0), new Weapon("атакует", 3.0)};
 
     public ArcherPeople() {
-        super("Люди| Лучник Человек","Люди");
-        setHit(weapon.hit);
-        setWeapon(weapon);
+        super("Люди| Лучник Человек", "Люди");
+        setWeapons(weapons);
     }
 
     @Override
     public String nameWeapon() {
-        return weapon.nameWeapon;
+        return getWeapon().getNameWeapon();
     }
 
 }
