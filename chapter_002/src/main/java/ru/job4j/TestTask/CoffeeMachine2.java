@@ -41,16 +41,7 @@ public class CoffeeMachine2 {
                 change -= nominal[index];
             } else {
                 index++;
-                if (change / nominal[index] > 0) {
-                    res[i] = nominal[index];
-                    change -= nominal[index];
-                } else {
-                    index++;
-                    if (change / nominal[index] > 0) {
-                        res[i] = nominal[index];
-                        change -= nominal[index];
-                    }
-                }
+                i--;
             }
         }
 
