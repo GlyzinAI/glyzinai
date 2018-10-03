@@ -1,4 +1,4 @@
-package ru.job4j.collections.phone_directory;
+package ru.job4j.collections.search;
 
 import java.util.ArrayList;
 import java.util.List;

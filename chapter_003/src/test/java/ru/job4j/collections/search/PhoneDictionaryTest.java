@@ -1,8 +1,6 @@
-package ru.job4j.collections.phone_dirictory;
+package ru.job4j.collections.search;
 
 import org.junit.Test;
-import ru.job4j.collections.phone_directory.Person;
-import ru.job4j.collections.phone_directory.PhoneDictionary;
 
 import java.util.List;
 
