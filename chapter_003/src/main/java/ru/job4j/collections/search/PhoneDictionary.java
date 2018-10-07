@@ -15,6 +15,12 @@ public class PhoneDictionary {
 
     private List<Person> person = new ArrayList<>();
 
+    /**
+     * method add
+     *
+     * @param person - person
+     */
+
     public void add(Person person) {
         this.person.add(person);
     }
