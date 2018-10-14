@@ -4,8 +4,8 @@ package ru.job4j.chess;
  * Class King.
  *
  * @author Artur Glyzin.
- * @version 1.0.
- * @since 09.09.2018.
+ * @version 2.0.
+ * @since 13.10.2018.
  */
 
 public class Knight extends Figure {
@@ -43,7 +43,7 @@ public class Knight extends Figure {
     }
 
     public boolean behavior(Cell source, Cell dest) {
-        return Math.abs(source.x - dest.x) == 1 && Math.abs(source.y - dest.y) == 2 ||
-                Math.abs(source.x - dest.x) == 2 && Math.abs(source.y - dest.y) == 1;
+        return Math.abs(source.x - dest.x) == 1 && Math.abs(source.y - dest.y) == 2
+                || Math.abs(source.x - dest.x) == 2 && Math.abs(source.y - dest.y) == 1;
     }
 }

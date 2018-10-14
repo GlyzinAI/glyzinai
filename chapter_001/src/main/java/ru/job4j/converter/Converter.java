@@ -4,8 +4,8 @@ package ru.job4j.converter;
  * class Converter - Корвертор валюты.
  *
  * @author Artur Glyzin.
- * @version 1.0.
- * @since 01.05.2018.
+ * @version 2.0.
+ * @since 13.10.2018.
  */
 public class Converter {
 
@@ -36,7 +36,7 @@ public class Converter {
      * @param value доллары.
      * @return рубли.
      */
-    public int DollarToRuble(int value) {
+    public int dollarToRuble(int value) {
         return value * 60;
     }
 
@@ -46,7 +46,7 @@ public class Converter {
      * @param value евро.
      * @return рубли.
      */
-    public int EuroToRuble(int value) {
+    public int euroToRuble(int value) {
         return value * 70;
     }
 }

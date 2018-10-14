@@ -6,8 +6,8 @@ import java.util.function.BiPredicate;
  * Draw pyramid
  *
  * @author Artur Glyzin.
- * @version 1.0.
- * @since 27.07.2018.
+ * @version 2.0.
+ * @since 13.10.2018.
  */
 
 public class RefactoringPaint {
@@ -16,10 +16,11 @@ public class RefactoringPaint {
         String ln = System.lineSeparator();
         for (int i = 0; i != height; i++) {
             for (int j = 0; j != weight; j++) {
-                if (predict.test(i, j))
+                if (predict.test(i, j)) {
                     builder.append("^");
-                else
+                } else {
                     builder.append(" ");
+                }
             }
             builder.append(ln);
         }
