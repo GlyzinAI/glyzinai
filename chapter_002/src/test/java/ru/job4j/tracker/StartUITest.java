@@ -6,6 +6,9 @@ import org.junit.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.Assert.assertThat;
 import static org.hamcrest.core.Is.is;
@@ -14,8 +17,8 @@ import static org.hamcrest.core.Is.is;
  * StartUITest - тест класс для проверки поведения пользователя.
  *
  * @author Artur Glyzin.
- * @version 3.0.
- * @since 12.08.2018.
+ * @version 4.0.
+ * @since 16.10.2018.
  */
 
 public class StartUITest {
@@ -50,19 +53,17 @@ public class StartUITest {
     @Test
     public void addItem() {
         Tracker tracker = new Tracker();
-        Input input = new StubInput(new String[]{"0", "test name", "desc", "6"});
+        Input input = new StubInput(Arrays.asList("0", "test name", "desc", "6"));
 
         new StartUI(input, tracker).init();
-        assertThat(tracker.getAll()[0].getName(), is("test name"));
+        assertThat(tracker.getAll().get(0).getName(), is("test name"));
     }
 
     @Test
     public void editItem() {
         Tracker tracker = new Tracker();
         Item item = tracker.add(new Item("task#1", "desc#1"));
-        Input input = new StubInput(new String[]{"2", item.getId(), "newTask", "newDesc", "6"});
-        //Input input = new StubInput(new LinkedList<>());
-
+        Input input = new StubInput(Arrays.asList("2", item.getId(), "newTask", "newDesc", "6"));
         new StartUI(input, tracker).init();
         assertThat(tracker.findById(item.getId()).getName(), is("newTask"));
     }
@@ -72,9 +73,10 @@ public class StartUITest {
         Tracker tracker = new Tracker();
         Item item1 = tracker.add(new Item("task#1", "desc#1"));
         Item item2 = tracker.add(new Item("task#2", "desc#2"));
-        Input input = new StubInput(new String[]{"3", item2.getId(), "6"});
+        Input input = new StubInput(Arrays.asList("3", item2.getId(), "6"));
         new StartUI(input, tracker).init();
-        Item[] itemResult = {item1};
+        List<Item> itemResult = new ArrayList<>();
+        itemResult.add(item1);
         assertThat(tracker.getAll(), is(itemResult));
     }
 
@@ -85,7 +87,7 @@ public class StartUITest {
         Item item2 = new Item("task#2", "desc#2");
         tracker.add(item1);
         tracker.add(item2);
-        Input input = new StubInput(new String[]{"1", "6"});
+        Input input = new StubInput(Arrays.asList("1", "6"));
         new StartUI(input, tracker).init();
 
         assertThat(new String(out.toByteArray()), is(
@@ -105,7 +107,7 @@ public class StartUITest {
         Tracker tracker = new Tracker();
         Item item = new Item("task#1", "desc#1");
         tracker.add(item);
-        Input input = new StubInput(new String[]{"4", item.getId(), "6"});
+        Input input = new StubInput(Arrays.asList("4", item.getId(), "6"));
         new StartUI(input, tracker).init();
         assertThat(new String(out.toByteArray()),
                 is(
