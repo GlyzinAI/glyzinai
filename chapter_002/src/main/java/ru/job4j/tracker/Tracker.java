@@ -6,8 +6,8 @@ import java.util.*;
  * Tracker - хранилище item(заявок).
  *
  * @author Artur Glyzin.
- * @version 2.0.
- * @since 16.10.2018.
+ * @version 4.0.
+ * @since 19.10.2018.
  */
 
 public class Tracker {
@@ -46,9 +46,10 @@ public class Tracker {
 
     public void replace(String id, Item item) {
         item.setId(id); //установка id для передаваемой в метод заявки
-        for (Item it : items) {
-            if (it.getId().equals(id)) {
-                items.set(items.indexOf(it), item);
+
+        for (int i = 0; i < items.size(); i++) {
+            if (items.get(i) != null && items.get(i).getId().equals(id)) {
+                items.set(i, item);
                 break;
             }
         }
@@ -60,9 +61,10 @@ public class Tracker {
      * @param id - id заявки, которую необходимо удалить
      */
     public void delete(String id) {
-        for (Item it : items) {
-            if (it != null && it.getId().equals(id)) {
-                items.remove(it);
+
+        for (int i = 0; i < items.size(); i++) {
+            if (items.get(i) != null && items.get(i).getId().equals(id)) {
+                items.remove(i);
                 break;
             }
         }
