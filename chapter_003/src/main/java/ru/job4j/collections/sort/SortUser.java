@@ -18,8 +18,7 @@ public class SortUser {
      */
 
     public Set<User> sort(List<User> list) {
-        Set<User> users = new TreeSet<>();
-        users.addAll(list);
+        Set<User> users = new TreeSet<>(list);
         return users;
     }
 }
