@@ -29,7 +29,7 @@ public class ListCompare implements Comparator<String> {
                     c1 = Character.toLowerCase(c1);
                     c2 = Character.toLowerCase(c2);
                     if (c1 != c2) {
-                        return c1 - c2;
+                        return Character.compare(c1, c2);
                     }
                 }
             }
