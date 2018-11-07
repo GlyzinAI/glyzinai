@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/GlyzinAI/glyzinai.svg?branch=master)](https://travis-ci.org/GlyzinAI/glyzinai)
+[![codecov](https://codecov.io/gh/GlyzinAI/glyzinai/branch/master/graph/badge.svg)](https://codecov.io/gh/GlyzinAI/glyzinai)
+
 <h1>Практический курс программирования Java.</h1>
 
 Инструменты разработки
