@@ -108,20 +108,20 @@ public class BankTest {
         Bank bank = new Bank();
         User user1 = new User("Artur", "11041993");
         User user2 = new User("Anton", "15081994");
-        Account account1_1 = new Account(2500.0, "0001_1");
-        Account account1_2 = new Account(11750.0, "0001_2");
-        Account account2_1 = new Account(1700.0, "0002_1");
-        Account account2_2 = new Account(1300.0, "0002_2");
+        Account account11 = new Account(2500.0, "00011");
+        Account account12 = new Account(11750.0, "00012");
+        Account account21 = new Account(1700.0, "00021");
+        Account account22 = new Account(1300.0, "00022");
         bank.addUser(user1);
         bank.addUser(user2);
-        bank.addAccountToUser("11041993", account1_1);
-        bank.addAccountToUser("11041993", account1_2);
-        bank.addAccountToUser("15081994", account2_1);
-        bank.addAccountToUser("15081994", account2_2);
-        boolean res = bank.transferMoney("11041993", "0001_1", "15081994", "0002_2", 500);
+        bank.addAccountToUser("11041993", account11);
+        bank.addAccountToUser("11041993", account12);
+        bank.addAccountToUser("15081994", account21);
+        bank.addAccountToUser("15081994", account22);
+        boolean res = bank.transferMoney("11041993", "00011", "15081994", "00022", 500);
         assertThat(res, is(true));
-        assertThat(account1_1.getValues(), is(2000.0));
-        assertThat(account2_2.getValues(), is(1800.0));
+        assertThat(account11.getValues(), is(2000.0));
+        assertThat(account22.getValues(), is(1800.0));
     }
 
 }

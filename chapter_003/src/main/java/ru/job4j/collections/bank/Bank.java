@@ -1,15 +1,12 @@
 package ru.job4j.collections.bank;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Class Bank.
  *
  * @author Artur Glyzin.
- * @version 2.0.
+ * @version 3.0.
  * @since 14.11.2018.
  */
 
@@ -56,22 +53,25 @@ public class Bank {
         return getList;
     }
 
-    public Account getAccount(String passport, String requisite) {
-        Account account = new Account(0.0, "000");
+    public Optional<Account> getAccount(String passport, String requisite) {
         List<Account> list = getUserAccounts(passport);
 
         for (Account acc : list) {
             if (acc.getRequisites().equals(requisite)) {
-                account = acc;
+                return Optional.of(acc);
             }
         }
 
-        return account;
+        return Optional.empty();
     }
 
     public boolean transferMoney(String srcPassport, String srcRequisite, String destPassport, String destRequisite, double amount) {
-        Account srcAccount = getAccount(srcPassport, srcRequisite);
-        Account destAccount = getAccount(destPassport, destRequisite);
-        return srcAccount.transfer(destAccount, amount);
+        boolean res = false;
+        Optional<Account> srcAccount = getAccount(srcPassport, srcRequisite);
+        Optional<Account> destAccount = getAccount(destPassport, destRequisite);
+        if (srcAccount.isPresent() && destAccount.isPresent()) {
+            res = srcAccount.get().transfer(destAccount.get(), amount);
+        }
+        return res;
     }
 }
