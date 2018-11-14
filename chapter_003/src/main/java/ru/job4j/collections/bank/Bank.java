@@ -9,7 +9,7 @@ import java.util.Map;
  * Class Bank.
  *
  * @author Artur Glyzin.
- * @version 1.0.
+ * @version 2.0.
  * @since 14.11.2018.
  */
 
@@ -56,54 +56,22 @@ public class Bank {
         return getList;
     }
 
-    public boolean transferMoney(String srcPassport, String srcRequisite, String destPassport, String destRequisite, double amount) {
-        int indexSrc = -1;
-        int indexDest = -1;
-        boolean result = true;
-        if (srcPassport.equals(destPassport)) {
-            List<Account> list = getUserAccounts(srcPassport);
-            for (Account account : list) {
-                if (account.getRequisites().equals(srcRequisite)) {
-                    indexSrc = list.indexOf(account);
-                }
-                if (account.getRequisites().equals(destRequisite)) {
-                    indexDest = list.indexOf(account);
-                }
-            }
+    public Account getAccount(String passport, String requisite) {
+        Account account = new Account(0.0, "000");
+        List<Account> list = getUserAccounts(passport);
 
-            if (indexSrc != -1 && indexDest != -1) {
-
-                Account srcAccount = list.get(indexSrc);
-                Account destAccount = list.get(indexDest);
-                return srcAccount.transfer(destAccount, amount);
-            } else {
-                result = false;
-            }
-        } else {
-            List<Account> listSrc = getUserAccounts(srcPassport);
-            List<Account> listDest = getUserAccounts(destPassport);
-
-            for (Account account : listSrc) {
-                if (account.getRequisites().equals(srcRequisite)) {
-                    indexSrc = listSrc.indexOf(account);
-                }
-            }
-
-            for (Account account : listDest) {
-                if (account.getRequisites().equals(destRequisite)) {
-                    indexDest = listDest.indexOf(account);
-                }
-            }
-
-            if (indexSrc != -1 && indexDest != -1) {
-
-                Account srcAccount = listSrc.get(indexSrc);
-                Account destAccount = listDest.get(indexDest);
-                result = srcAccount.transfer(destAccount, amount);
-            } else {
-                result = false;
+        for (Account acc : list) {
+            if (acc.getRequisites().equals(requisite)) {
+                account = acc;
             }
         }
-        return result;
+
+        return account;
+    }
+
+    public boolean transferMoney(String srcPassport, String srcRequisite, String destPassport, String destRequisite, double amount) {
+        Account srcAccount = getAccount(srcPassport, srcRequisite);
+        Account destAccount = getAccount(destPassport, destRequisite);
+        return srcAccount.transfer(destAccount, amount);
     }
 }
