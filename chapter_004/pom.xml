@@ -8,12 +8,8 @@
         <version>2.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-
-    <artifactId>chapter_003</artifactId>
     <packaging>pom</packaging>
-    <modules>
-        <module>../chapter_004</module>
-    </modules>
+    <artifactId>chapter_004</artifactId>
 
 
 </project>
