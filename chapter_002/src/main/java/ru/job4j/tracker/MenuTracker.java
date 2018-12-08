@@ -2,13 +2,14 @@ package ru.job4j.tracker;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 
 /**
  * MenuTracker.
  *
  * @author Artur Glyzin.
- * @version 4.0.
- * @since 16.10.2018.
+ * @version 5.0.
+ * @since 08.12.2018.
  */
 
 public class MenuTracker {
@@ -26,6 +27,12 @@ public class MenuTracker {
      */
 
     private List<UserAction> actions = new ArrayList<>();
+
+    /**
+     * @param consumer - for show menu.
+     */
+
+    private Consumer<String> consumer = System.out::println;
 
     /**
      * Конструктор.
@@ -251,13 +258,15 @@ public class MenuTracker {
     }
 
     /**
+     * method show - show menu, use Consumer<String>
+     *
      * Метод выводит на экран меню.
      */
 
     public void show() {
         for (UserAction action : this.actions) {
             if (action != null) {
-                System.out.println(action.info());
+                consumer.accept(action.info());
             }
         }
     }
