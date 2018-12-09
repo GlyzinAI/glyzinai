@@ -8,8 +8,8 @@ import java.util.function.Consumer;
  * StartUI.
  *
  * @author Artur Glyzin.
- * @version 4.0.
- * @since 12.08.2018.
+ * @version 5.0.
+ * @since 09.12.2018.
  */
 
 public class StartUI {
@@ -35,7 +35,7 @@ public class StartUI {
         menu.fillActions(this);
         menu.allActions(range);
         do {
-            menu.show();
+            menu.show(System.out::println);
             menu.select(input.ask("select:", range));
         } while (this.working);
     }

@@ -8,8 +8,8 @@ import java.util.function.Consumer;
  * MenuTracker.
  *
  * @author Artur Glyzin.
- * @version 5.0.
- * @since 08.12.2018.
+ * @version 6.0.
+ * @since 09.12.2018.
  */
 
 public class MenuTracker {
@@ -32,7 +32,6 @@ public class MenuTracker {
      * @param consumer - for show menu.
      */
 
-    private Consumer<String> consumer = System.out::println;
 
     /**
      * Конструктор.
@@ -259,11 +258,11 @@ public class MenuTracker {
 
     /**
      * method show - show menu, use Consumer<String>
-     *
+     * <p>
      * Метод выводит на экран меню.
      */
 
-    public void show() {
+    public void show(Consumer<String> consumer) {
         for (UserAction action : this.actions) {
             if (action != null) {
                 consumer.accept(action.info());
