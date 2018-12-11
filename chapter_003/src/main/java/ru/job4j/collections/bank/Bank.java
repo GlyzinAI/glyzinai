@@ -6,8 +6,8 @@ import java.util.*;
  * Class Bank.
  *
  * @author Artur Glyzin.
- * @version 3.0.
- * @since 14.11.2018.
+ * @version 4.0.
+ * @since 11.12.2018.
  */
 
 public class Bank {
@@ -26,21 +26,13 @@ public class Bank {
     }
 
     public void addAccountToUser(String passport, Account account) {
-        for (User user : listAccounts.keySet()) {
-            if (user.getPassport().equals(passport)) {
-                listAccounts.get(user).add(account);
-                break;
-            }
-        }
+        User user = this.positionById(passport);
+        listAccounts.get(user).add(account);
     }
 
     public void deleteAccountFromUser(String passport, Account account) {
-        for (User user : listAccounts.keySet()) {
-            if (user.getPassport().equals(passport)) {
-                listAccounts.get(user).remove(account);
-                break;
-            }
-        }
+        User user = this.positionById(passport);
+        listAccounts.get(user).remove(account);
     }
 
     public List<Account> getUserAccounts(String passport) {
@@ -73,5 +65,11 @@ public class Bank {
             res = srcAccount.get().transfer(destAccount.get(), amount);
         }
         return res;
+    }
+
+    private User positionById(String passport) {
+        return listAccounts.keySet().stream()
+                .filter(i -> i.getPassport().equals(passport))
+                .findFirst().orElse(null);
     }
 }

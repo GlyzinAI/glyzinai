@@ -1,16 +1,13 @@
 package ru.job4j.collections.sort;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 /**
  * Class Department - sorting departments.
  *
  * @author Artur Glyzin.
- * @version 1.0.
- * @since 27.11.2018.
+ * @version 2.0.
+ * @since 11.12.2018.
  */
 
 public class Department {
@@ -116,21 +113,18 @@ public class Department {
      * @return comparator
      */
     private Comparator<List<String>> sortUpDownComparator(int ascend) {
-        Comparator<List<String>> comparator = new Comparator<List<String>>() {
-            @Override
-            public int compare(List<String> o1, List<String> o2) {
-                int result = 0;
+        Comparator<List<String>> comparator = (o1, o2) -> {
+            int result = 0;
 
-                Iterator<String> it1 = o1.iterator();
-                Iterator<String> it2 = o2.iterator();
-                while (it1.hasNext() && it2.hasNext() && result == 0) {
-                    result = ascend * it1.next().compareTo(it2.next());
-                }
-                if (result == 0) {
-                    result = Integer.valueOf(o1.size()).compareTo(Integer.valueOf(o2.size()));
-                }
-                return result;
+            Iterator<String> it1 = o1.iterator();
+            Iterator<String> it2 = o2.iterator();
+            while (it1.hasNext() && it2.hasNext() && result == 0) {
+                result = ascend * it1.next().compareTo(it2.next());
             }
+            if (result == 0) {
+                result = Integer.compare(o1.size(), o2.size());
+            }
+            return result;
         };
         return comparator;
     }
