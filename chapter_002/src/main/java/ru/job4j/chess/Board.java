@@ -1,11 +1,14 @@
 package ru.job4j.chess;
 
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * Class Board.
  *
  * @author Artur Glyzin.
- * @version 1.0.
- * @since 09.09.2018.
+ * @version 2.0.
+ * @since 11.12.2018.
  */
 
 public class Board {
@@ -49,40 +52,32 @@ public class Board {
     }
 
     public boolean occupiedWay(Cell[] steps) {
-        boolean result = false;
-        for (Cell step : steps) {
-            if (this.findCell(step)) {
-                result = true;
-                break;
-            }
-        }
-        return result;
+        return Arrays.stream(steps)
+                .filter(this::findCell)
+                .findFirst().orElse(null) != null;
     }
 
     public boolean findCell(Cell step) {
-        boolean res = false;
-        for (Figure figure : figures) {
-            if (figure != null && figure.getPosition().equals(step)) {
-                res = true;
-                break;
-            }
-        }
-        return res;
+        return Arrays.stream(figures)
+                .filter(figure -> figure != null && figure.getPosition().equals(step))
+                .findFirst().orElse(null) != null;
     }
 
     public void clean() {
-        this.figures = new Figure[32];
+        Arrays.stream(this.figures)
+                .forEach(figure -> figure = null);
     }
 
     public int findFigure(Cell cell) {
-        int index = -1;
-        for (int i = 0; i < figures.length; i++) {
-            if (figures[i] != null && figures[i].getPosition().equals(cell)) {
-                index = i;
-                break;
-            }
-        }
-        return index;
+        final int[] rst = {-1};
+        List<Figure> figureList = Arrays.asList(this.figures);
+        figureList.stream()
+                .forEach(figure -> {
+                    if (figure != null && figure.getPosition().equals(cell)) {
+                        rst[0] = figureList.indexOf(figure);
+                    }
+                });
+        return rst[0];
     }
 }
 
