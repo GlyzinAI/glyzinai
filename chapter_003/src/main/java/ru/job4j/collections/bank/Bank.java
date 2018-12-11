@@ -26,23 +26,28 @@ public class Bank {
     }
 
     public void addAccountToUser(String passport, Account account) {
+
         User user = this.positionById(passport);
-        listAccounts.get(user).add(account);
+        if (user != null) {
+            listAccounts.get(user).add(account);
+        } else {
+            System.out.println("Пользователь не существует");
+        }
     }
 
     public void deleteAccountFromUser(String passport, Account account) {
         User user = this.positionById(passport);
-        listAccounts.get(user).remove(account);
+        if (user != null) {
+            listAccounts.get(user).remove(account);
+        } else {
+            System.out.println("Пользователь не существует");
+        }
+
     }
 
     public List<Account> getUserAccounts(String passport) {
-        List<Account> getList = new ArrayList<>();
-        for (User user : listAccounts.keySet()) {
-            if (user.getPassport().equals(passport)) {
-                getList.addAll(listAccounts.get(user));
-            }
-        }
-        return getList;
+        User user = this.positionById(passport);
+        return user != null ? this.listAccounts.get(user) : Collections.emptyList();
     }
 
     public Optional<Account> getAccount(String passport, String requisite) {
