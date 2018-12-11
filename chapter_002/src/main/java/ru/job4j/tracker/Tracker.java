@@ -1,13 +1,15 @@
 package ru.job4j.tracker;
 
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 /**
  * Tracker - хранилище item(заявок).
  *
  * @author Artur Glyzin.
- * @version 4.0.
- * @since 19.10.2018.
+ * @version 5.0.
+ * @since 11.12.2018.
  */
 
 public class Tracker {
@@ -15,12 +17,12 @@ public class Tracker {
      * Лист для хранения заявок.
      */
     private final List<Item> items = new ArrayList<>();
-    private static final Random RN = new Random();
 
     /**
-     * Указатель ячейки для новой заявки.
+     * для генерации уникального номера
      */
-    int position = 0;
+
+    private static final Random RN = new Random();
 
     /**
      * Метод реализующий добавление заявки в хранилище
@@ -46,12 +48,9 @@ public class Tracker {
 
     public void replace(String id, Item item) {
         item.setId(id); //установка id для передаваемой в метод заявки
-
-        for (int i = 0; i < items.size(); i++) {
-            if (items.get(i) != null && items.get(i).getId().equals(id)) {
-                items.set(i, item);
-                break;
-            }
+        int index = this.positionById(id);
+        if (index != -1) {
+            items.set(index, item);
         }
     }
 
@@ -61,12 +60,9 @@ public class Tracker {
      * @param id - id заявки, которую необходимо удалить
      */
     public void delete(String id) {
-
-        for (int i = 0; i < items.size(); i++) {
-            if (items.get(i) != null && items.get(i).getId().equals(id)) {
-                items.remove(i);
-                break;
-            }
+        int index = this.positionById(id);
+        if (index != -1) {
+            items.remove(index);
         }
     }
 
@@ -87,13 +83,9 @@ public class Tracker {
      * @return list result - лист заявок
      */
     public List<Item> findByName(String key) {
-        List<Item> result = new ArrayList<>();
-        for (Item it : items) {
-            if (it != null && it.getName().equals(key)) {
-                result.add(it);
-            }
-        }
-        return result;
+        return this.items.stream()
+                .filter(i -> i != null && i.getName().equals(key))
+                .collect(Collectors.toList());
     }
 
     /**
@@ -103,14 +95,14 @@ public class Tracker {
      * @return заявка, соответствующая переданному id.
      */
     public Item findById(String id) {
-        Item result = null;
-        for (Item it : items) {
-            if (it != null && it.getId().equals(id)) {
-                result = it;
-                break;
-            }
-        }
-        return result;
+        int index = this.positionById(id);
+        return index != -1 ? this.items.get(index) : null;
+    }
+
+    private int positionById(String id) {
+        return IntStream.range(0, this.items.size())
+                .filter(i -> this.items.get(i).getId().equals(id))
+                .findFirst().orElse(-1);
     }
 }
 
