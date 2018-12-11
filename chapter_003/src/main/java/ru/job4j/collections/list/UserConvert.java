@@ -1,15 +1,15 @@
 package ru.job4j.collections.list;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * Class UserConvert - преобразования List в Map.
  *
  * @author Artur Glyzin.
- * @version 2.0.
- * @since 16.10.2018.
+ * @version 3.0.
+ * @since 10.12.2018.
  */
 
 public class UserConvert {
@@ -20,10 +20,6 @@ public class UserConvert {
      */
 
     public Map<Integer, User> process(List<User> list) {
-        Map<Integer, User> map = new HashMap<>();
-        for (User user : list) {
-            map.put(user.getId(), user);
-        }
-        return map;
+        return list.stream().collect(Collectors.toMap(User::getId, user -> user));
     }
 }

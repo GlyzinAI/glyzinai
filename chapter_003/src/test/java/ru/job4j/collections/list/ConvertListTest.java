@@ -67,4 +67,3 @@ public class ConvertListTest {
         assertThat(result, is(expect));
     }
 }
-

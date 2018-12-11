@@ -4,11 +4,11 @@ package ru.job4j.collections.sort;
  * Class User.
  *
  * @author Artur Glyzin.
- * @version 2.0.
- * @since 06.11.2018.
+ * @version 3.0.
+ * @since 10.12.2018.
  */
 
-public class User {
+public class User implements Comparable<User> {
 
     private String name;
     private int age;
@@ -34,4 +34,8 @@ public class User {
         this.age = age;
     }
 
+    @Override
+    public int compareTo(User o) {
+        return Integer.compare(this.age, o.age);
+    }
 }

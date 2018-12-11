@@ -1,14 +1,19 @@
 package ru.job4j.collections.list;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 /**
  * ConvertList - conversion ArrayList in array[][]
  *
  * @author Artur Glyzin
- * @version 3.0.
- * @since 14.10.2018
+ * @version 4.0.
+ * @since 11.12.2018
  */
 
 public class ConvertList {
@@ -21,7 +26,7 @@ public class ConvertList {
      * @return - array[][]
      */
 
-    public int[][] toArray(List<Integer> list, int rows) {
+    public static int[][] toArray(List<Integer> list, int rows) {
         int cell = (int) (Math.ceil((double) list.size() / rows));
         int[][] array = new int[rows][cell];
         int count = 0;
@@ -41,12 +46,9 @@ public class ConvertList {
      */
 
     public List<Integer> convert(List<int[]> list) {
-        List<Integer> arrList = new ArrayList<>();
-        for (int i = 0; i < list.size(); i++) {
-            for (int j = 0; j < list.get(i).length; j++) {
-                arrList.add(list.get(i)[j]);
-            }
-        }
-        return arrList;
+        return list.stream()
+                .flatMapToInt(Arrays::stream)
+                .boxed()
+                .collect(Collectors.toList());
     }
 }

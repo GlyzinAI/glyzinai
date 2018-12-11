@@ -1,14 +1,16 @@
 package ru.job4j.collections.list;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Class ConvertMatrix - conversions array to list.
  *
  * @author Artur Glyzin.
- * @version 1.0.
- * @since 14.10.2018.
+ * @version 2.0.
+ * @since 10.12.2018.
  */
 
 public class ConvertMatrix {
@@ -19,12 +21,9 @@ public class ConvertMatrix {
      */
 
     public List<Integer> toList(int[][] array) {
-        List<Integer> list = new ArrayList<>();
-        for (int i = 0; i < array.length; i++) {
-            for (int j = 0; j < array[i].length; j++) {
-                list.add(array[i][j]);
-            }
-        }
-        return list;
+        return Arrays.stream(array)
+                .flatMapToInt(Arrays::stream)
+                .boxed()
+                .collect(Collectors.toList());
     }
 }
