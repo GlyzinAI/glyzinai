@@ -6,8 +6,8 @@ import java.util.LinkedList;
  * Class PriorityQueue - очередь с приоритетом на LinkedList.
  *
  * @author Artur Glyzin.
- * @version 1.0.
- * @since 03.10.2018.
+ * @version 2.0.
+ * @since 19.12.2018.
  */
 
 public class PriorityQueue {
@@ -21,7 +21,7 @@ public class PriorityQueue {
 
     public void put(Task task) {
 
-        int index = 0;
+        var index = 0;
 
         for (Task t : tasks) {
             if (t != null && t.getPriority() > task.getPriority()) {
