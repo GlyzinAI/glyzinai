@@ -12,8 +12,8 @@ import static org.hamcrest.core.Is.is;
  * ConvertMatrixTest
  *
  * @author Artur Glyzin.
- * @version 1.0.
- * @since 14.10.2018.
+ * @version 2.0.
+ * @since 19.12.2018.
  */
 
 public class ConvertMatrixTest {
@@ -24,7 +24,7 @@ public class ConvertMatrixTest {
                 {1, 2},
                 {3, 4}
         };
-        List<Integer> expect = Arrays.asList(1, 2, 3, 4);
+        List<Integer> expect = List.of(1, 2, 3, 4);
         List<Integer> result = list.toList(input);
         assertThat(result, is(expect));
     }
@@ -37,8 +37,7 @@ public class ConvertMatrixTest {
                 {11, 13, 8, 16},
                 {44, 76, 0, 56}
         };
-
-        List<Integer> expect = Arrays.asList(3, 5, 7, 4, 11, 13, 8, 16, 44, 76, 0, 56);
+        List<Integer> expect = List.of(3, 5, 7, 4, 11, 13, 8, 16, 44, 76, 0, 56);
         List<Integer> result = list.toList(input);
         assertThat(result, is(expect));
     }
@@ -51,8 +50,7 @@ public class ConvertMatrixTest {
                 {14, 15, 16, 17},
                 {18, 19, 20, 21, 22}
         };
-
-        List<Integer> expect = Arrays.asList(11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22);
+        List<Integer> expect = List.of(11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22);
         List<Integer> result = list.toList(input);
         assertThat(result, is(expect));
     }

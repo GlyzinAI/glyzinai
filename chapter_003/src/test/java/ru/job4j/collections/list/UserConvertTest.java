@@ -11,8 +11,8 @@ import static org.hamcrest.core.Is.is;
  * Class UserConvertTest.
  *
  * @author Artur Glyzin.
- * @version 1.0.
- * @since 15.10.2018.
+ * @version 2.0.
+ * @since 19.12.2018.
  */
 
 public class UserConvertTest {
@@ -22,16 +22,12 @@ public class UserConvertTest {
         User user2 = new User(2, "Daria", "Spb");
         User user3 = new User(3, "Alex", "Moscow");
 
-        List<User> list = new ArrayList<>();
-        list.addAll(Arrays.asList(user1, user2, user3));
+        List<User> list = List.of(user1, user2, user3);
 
         UserConvert userConvert = new UserConvert();
 
         Map<Integer, User> result = userConvert.process(list);
-        Map<Integer, User> expect = new HashMap<>();
-        expect.put(1, new User(1, "Artur", "Spb"));
-        expect.put(2, new User(2, "Daria", "Spb"));
-        expect.put(3, new User(3, "Alex", "Moscow"));
+        Map<Integer, User> expect = Map.of(1, user1, 2, user2, 3, user3);
 
         assertThat(result, is(expect));
     }

@@ -11,8 +11,8 @@ import static org.hamcrest.core.Is.is;
  * Class SortUserTest.
  *
  * @author Artur Glyzin.
- * @version 3.0.
- * @since 10.12.2018.
+ * @version 4.0.
+ * @since 19.12.2018.
  */
 
 public class SortUserTest {
@@ -26,9 +26,8 @@ public class SortUserTest {
         User user4 = new User("Оля", 19);
         User user5 = new User("Мария", 33);
         User user6 = new User("Ян", 14);
-        List<User> listUsers = Arrays.asList(user1, user2, user3, user4, user5, user6);
-        Set<User> expect = new HashSet<>();
-        Collections.addAll(expect, user6, user4, user3, user1, user5, user2);
+        List<User> listUsers = List.of(user1, user2, user3, user4, user5, user6);
+        Set<User> expect = Set.of(user6, user4, user3, user1, user5, user2);
         Set<User> res = sortUser.sort(listUsers);
         assertThat(res, is(expect));
     }
@@ -42,10 +41,10 @@ public class SortUserTest {
         User user4 = new User("Оля", 19);
         User user5 = new User("Мария", 33);
         User user6 = new User("Ян", 14);
-        List<User> list = new ArrayList<>();
-        list.addAll(Arrays.asList(user1, user2, user3, user4, user5, user6));
+        List<User> list = List.of(user1, user2, user3, user4, user5, user6);
         List<User> result = sortUser.sortNameLength(list);
-        assertThat(result, is(Arrays.asList(user6, user4, user2, user5, user1, user3)));
+        List<User> expect = List.of(user6, user4, user2, user5, user1, user3);
+        assertThat(result, is(expect));
     }
 
     @Test
@@ -55,10 +54,10 @@ public class SortUserTest {
         User user2 = new User("Иван", 30);
         User user3 = new User("Сергей", 25);
         User user4 = new User("Иван", 25);
-        List<User> list = new ArrayList<>();
-        list.addAll(Arrays.asList(user1, user2, user3, user4));
+        List<User> list = List.of(user1, user2, user3, user4);
         List<User> result = sortUser.sortAllFieldsUseFunction(list);
-        assertThat(result, is(Arrays.asList(user4, user2, user1, user3)));
+        List<User> expect = List.of(user4, user2, user1, user3);
+        assertThat(result, is(expect));
     }
 
 
@@ -75,9 +74,9 @@ public class SortUserTest {
         User user8 = new User("Иван", 30);
         User user9 = new User("Сергей", 25);
         User user10 = new User("Антон", 27);
-        List<User> list = new ArrayList<>();
-        list.addAll(Arrays.asList(user1, user2, user3, user4, user5, user6, user7, user8, user9, user10));
+        List<User> list = List.of(user1, user2, user3, user4, user5, user6, user7, user8, user9, user10);
         List<User> result = sortUser.sortAllFieldsUseFunction(list);
-        assertThat(result, is(Arrays.asList(user3, user4, user10, user2, user8, user5, user7, user9, user1, user6)));
+        List<User> expect = List.of(user3, user4, user10, user2, user8, user5, user7, user9, user1, user6);
+        assertThat(result, is(expect));
     }
 }

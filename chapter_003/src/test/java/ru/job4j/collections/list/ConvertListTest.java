@@ -13,8 +13,8 @@ import static org.hamcrest.core.Is.is;
  * CConvertListTest
  *
  * @author Artur Glyzin
- * @version 3.0.
- * @since 14.10.2018
+ * @version 4.0.
+ * @since 19.12.2018
  */
 
 public class ConvertListTest {
@@ -63,7 +63,7 @@ public class ConvertListTest {
         arrList.add(new int[]{1, 2, 3});
         arrList.add(new int[]{5, 8, 13, 22});
         List<Integer> result = list.convert(arrList);
-        List<Integer> expect = Arrays.asList(1, 2, 3, 5, 8, 13, 22);
+        List<Integer> expect = List.of(1, 2, 3, 5, 8, 13, 22);
         assertThat(result, is(expect));
     }
 }
