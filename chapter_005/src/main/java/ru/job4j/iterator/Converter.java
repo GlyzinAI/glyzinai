@@ -1,6 +1,5 @@
 package ru.job4j.iterator;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
@@ -8,7 +7,7 @@ import java.util.NoSuchElementException;
  * Class Converter.
  *
  * @author Artur Glyzin.
- * @version 1.0.
+ * @version 2.0.
  * @since 10.02.2019.
  */
 
@@ -16,7 +15,7 @@ public class Converter {
     public Iterator<Integer> convert(Iterator<Iterator<Integer>> it) {
         return new Iterator<Integer>() {
 
-            private Iterator<Integer> iterator = (new ArrayList<Integer>()).iterator();
+            private Iterator<Integer> iterator = it.next();
 
 
             @Override
