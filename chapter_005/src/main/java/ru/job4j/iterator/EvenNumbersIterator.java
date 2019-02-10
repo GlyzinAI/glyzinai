@@ -31,6 +31,7 @@ public class EvenNumbersIterator implements Iterator {
     public boolean hasNext() {
         for (int i = index; i < numbers.length; i++) {
             if (numbers[i] % 2 == 0) {
+                index = i;
                 return true;
             }
         }
@@ -48,10 +49,6 @@ public class EvenNumbersIterator implements Iterator {
     public Object next() {
         if (!hasNext()) {
             throw new NoSuchElementException();
-        }
-
-        while (numbers[index] % 2 != 0) {
-            index++;
         }
         return numbers[index++];
     }
