@@ -15,7 +15,7 @@ import static org.hamcrest.core.Is.is;
  * Class SimpleArrayTest for testing SimpleArray class.
  *
  * @author Artur Glyzin.
- * @version 2.0.
+ * @version 3.0.
  * @since 15.02.2019.
  */
 
@@ -117,5 +117,12 @@ public class SimpleArrayTest {
         array = new SimpleArray<>(0);
         Iterator it = array.iterator();
         it.next();
+    }
+
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void checkIndexOutBoundsException() {
+        SimpleArray array2 = new SimpleArray<>(10);
+        array2.set(5, 1);
+
     }
 }

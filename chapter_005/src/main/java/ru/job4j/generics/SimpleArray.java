@@ -8,14 +8,14 @@ import java.util.NoSuchElementException;
  *
  * @param <T> - param
  * @author Artur Glyzin.
- * @version 2.0.
+ * @version 3.0.
  * @since 15.02.2019.
  */
 
 public class SimpleArray<T> implements Iterable<T> {
 
-    Object[] array;
-    int index = 0;
+    private Object[] array;
+    private int index = 0;
 
     public SimpleArray(int size) {
         array = new Object[size];
@@ -39,7 +39,7 @@ public class SimpleArray<T> implements Iterable<T> {
      */
 
     public void set(int index, T value) {
-        if (index < 0 || index >= array.length) {
+        if (index < 0 || index >= this.index) {
             throw new IndexOutOfBoundsException();
         }
         this.array[index] = value;
