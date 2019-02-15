@@ -6,6 +6,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 import static org.junit.Assert.assertThat;
 import static org.hamcrest.core.Is.is;
@@ -14,7 +15,7 @@ import static org.hamcrest.core.Is.is;
  * Class SimpleArrayTest for testing SimpleArray class.
  *
  * @author Artur Glyzin.
- * @version 1.0.
+ * @version 2.0.
  * @since 15.02.2019.
  */
 
@@ -111,7 +112,7 @@ public class SimpleArrayTest {
         assertThat(it.next(), is(25));
     }
 
-    @Test(expected = ArrayIndexOutOfBoundsException.class)
+    @Test(expected = NoSuchElementException.class)
     public void whenCheckNoSuchElementException() {
         array = new SimpleArray<>(0);
         Iterator it = array.iterator();

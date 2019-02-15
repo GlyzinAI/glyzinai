@@ -1,31 +1,24 @@
 package ru.job4j.generics;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 /**
  * Class SimpleArray wrapper over array.
  *
  * @param <T> - param
  * @author Artur Glyzin.
- * @version 1.0.
+ * @version 2.0.
  * @since 15.02.2019.
  */
 
 public class SimpleArray<T> implements Iterable<T> {
 
-    private static final Object[] EMPTY_ARRAY = {};
-
     Object[] array;
     int index = 0;
 
     public SimpleArray(int size) {
-        if (size > 0) {
-            this.array = new Object[size];
-        } else if (size == 0) {
-            this.array = EMPTY_ARRAY;
-        } else {
-            throw new IllegalArgumentException("Illegal Capacity: " + array.length);
-        }
+        array = new Object[size];
     }
 
     /**
@@ -46,7 +39,9 @@ public class SimpleArray<T> implements Iterable<T> {
      */
 
     public void set(int index, T value) {
-        rangeCheckIndex(index);
+        if (index < 0 || index >= array.length) {
+            throw new IndexOutOfBoundsException();
+        }
         this.array[index] = value;
     }
 
@@ -59,8 +54,7 @@ public class SimpleArray<T> implements Iterable<T> {
     public void remove(int index) {
         rangeCheckIndex(index);
         Object[] newArray = new Object[array.length - 1];
-        System.arraycopy(array, 0, newArray, 0, index);
-        System.arraycopy(array, index + 1, newArray, index, array.length - index - 1);
+        System.arraycopy(array, index + 1, newArray, index, array.length - 1 - index);
         array = newArray;
     }
 
@@ -103,24 +97,38 @@ public class SimpleArray<T> implements Iterable<T> {
 
     @Override
     public Iterator<T> iterator() {
-        index = 0;
         return new ElementIterator<T>();
     }
 
     private class ElementIterator<T> implements Iterator<T> {
 
+        private int currentElement;
+
+        private int lastElement = -1;
+
 
         @Override
         public boolean hasNext() {
-            if (index < array.length) {
-                return true;
-            }
-            return false;
+            return this.currentElement != array.length;
         }
 
         @Override
         public T next() {
-            return (T) array[index++];
+            if (!hasNext()) {
+                throw new NoSuchElementException();
+            }
+            this.lastElement = currentElement;
+            return SimpleArray.this.get(currentElement++);
+        }
+
+        @Override
+        public void remove() {
+            if (this.lastElement == -1) {
+                throw new UnsupportedOperationException();
+            }
+            SimpleArray.this.remove(this.lastElement);
+            this.lastElement = -1;
+            this.currentElement--;
         }
     }
 }
