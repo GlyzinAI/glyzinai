@@ -8,8 +8,8 @@ import java.util.NoSuchElementException;
  *
  * @param <T> - param
  * @author Artur Glyzin.
- * @version 3.0.
- * @since 15.02.2019.
+ * @version 4.0.
+ * @since 18.02.2019.
  */
 
 public class SimpleArray<T> implements Iterable<T> {
@@ -28,6 +28,9 @@ public class SimpleArray<T> implements Iterable<T> {
      */
 
     public void add(T value) {
+        if (this.index == this.array.length) {
+            throw new UnsupportedOperationException();
+        }
         this.array[index++] = value;
     }
 
@@ -39,9 +42,7 @@ public class SimpleArray<T> implements Iterable<T> {
      */
 
     public void set(int index, T value) {
-        if (index < 0 || index >= this.index) {
-            throw new IndexOutOfBoundsException();
-        }
+        rangeCheckIndex(index);
         this.array[index] = value;
     }
 
@@ -51,11 +52,11 @@ public class SimpleArray<T> implements Iterable<T> {
      * @param index - the index of the element to be removed.
      */
 
-    public void remove(int index) {
-        rangeCheckIndex(index);
-        Object[] newArray = new Object[array.length - 1];
-        System.arraycopy(array, index + 1, newArray, index, array.length - 1 - index);
-        array = newArray;
+    public T remove(int index) {
+        T removed = this.get(index);
+        System.arraycopy(this.array, index + 1, this.array, index, --this.index - index);
+        this.array[this.index] = null;
+        return removed;
     }
 
     /**
@@ -63,18 +64,18 @@ public class SimpleArray<T> implements Iterable<T> {
      */
 
     public int size() {
-        return array.length;
+        return index;
     }
 
     /**
      * Returns the element at the specified position in this array.
      *
-     * @param index - index of the element to return.
-     * @param <T>   - param.
+     * @param index - index of the element to return
      * @return the element at the specified position in this array.
      */
 
-    public <T> T get(int index) {
+    @SuppressWarnings("unchecked")
+    public T get(int index) {
         rangeCheckIndex(index);
         return (T) array[index];
     }
@@ -86,7 +87,7 @@ public class SimpleArray<T> implements Iterable<T> {
      */
 
     public void rangeCheckIndex(int index) {
-        if (index < 0 || index >= array.length) {
+        if (index < 0 || index >= this.index) {
             throw new IndexOutOfBoundsException();
         }
     }
@@ -97,38 +98,37 @@ public class SimpleArray<T> implements Iterable<T> {
 
     @Override
     public Iterator<T> iterator() {
-        return new ElementIterator<T>();
-    }
+        return new Iterator<>() {
 
-    private class ElementIterator<T> implements Iterator<T> {
+            private int currentElement;
 
-        private int currentElement;
-
-        private int lastElement = -1;
+            private int lastElement = -1;
 
 
-        @Override
-        public boolean hasNext() {
-            return this.currentElement != index;
-        }
-
-        @Override
-        public T next() {
-            if (!hasNext()) {
-                throw new NoSuchElementException();
+            @Override
+            public boolean hasNext() {
+                return currentElement != index;
             }
-            this.lastElement = currentElement;
-            return SimpleArray.this.get(currentElement++);
-        }
 
-        @Override
-        public void remove() {
-            if (this.lastElement == -1) {
-                throw new UnsupportedOperationException();
+            @Override
+            public T next() {
+                if (!hasNext()) {
+                    throw new NoSuchElementException();
+                }
+                this.lastElement = this.currentElement;
+                return SimpleArray.this.get(this.currentElement++);
             }
-            SimpleArray.this.remove(this.lastElement);
-            this.lastElement = -1;
-            this.currentElement--;
-        }
+
+            @Override
+            public void remove() {
+                if (this.lastElement == -1) {
+                    throw new UnsupportedOperationException();
+                }
+
+                SimpleArray.this.remove(this.lastElement);
+                this.lastElement = -1;
+                this.currentElement--;
+            }
+        };
     }
 }

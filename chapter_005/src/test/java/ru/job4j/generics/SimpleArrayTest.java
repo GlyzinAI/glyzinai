@@ -15,9 +15,10 @@ import static org.hamcrest.core.Is.is;
  * Class SimpleArrayTest for testing SimpleArray class.
  *
  * @author Artur Glyzin.
- * @version 3.0.
- * @since 15.02.2019.
+ * @version 4.0.
+ * @since 18.02.2019.
  */
+
 
 public class SimpleArrayTest {
 
@@ -44,7 +45,7 @@ public class SimpleArrayTest {
 
     @Test
     public void whenCheckThrowException() {
-        thrown.expect(ArrayIndexOutOfBoundsException.class);
+        thrown.expect(UnsupportedOperationException.class);
         array.add(1);
         array.add(2);
         thrown = ExpectedException.none();
@@ -67,7 +68,7 @@ public class SimpleArrayTest {
     public void whenCheckRemoveElementIsArray() {
         array.remove(0);
         assertThat(array.get(0), is(10));
-        assertThat(array.size(), is(5));
+        assertThat(array.size(), is(4));
     }
 
     @Test
@@ -123,6 +124,5 @@ public class SimpleArrayTest {
     public void checkIndexOutBoundsException() {
         SimpleArray array2 = new SimpleArray<>(10);
         array2.set(5, 1);
-
     }
 }
