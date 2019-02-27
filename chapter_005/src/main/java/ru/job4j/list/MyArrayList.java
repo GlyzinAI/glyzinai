@@ -9,7 +9,7 @@ import java.util.NoSuchElementException;
  *
  * @param <E> - param.
  * @author Artur Glyzin.
- * @version 1.0.
+ * @version 2.0.
  * @since 27.02.2019.
  */
 
@@ -31,13 +31,17 @@ public class MyArrayList<E> implements Iterable<E> {
 
     public void add(E value) {
         if (size >= array.length) {
-            E[] bigger = (E[]) new Object[array.length * 2];
-            System.arraycopy(array, 0, bigger, 0, array.length);
-            array = bigger;
+            increaseSize();
         }
         array[size] = value;
         size++;
         modCount++;
+    }
+
+    private void increaseSize() {
+        E[] bigger = (E[]) new Object[array.length * 2];
+        System.arraycopy(array, 0, bigger, 0, array.length);
+        array = bigger;
     }
 
     /**
