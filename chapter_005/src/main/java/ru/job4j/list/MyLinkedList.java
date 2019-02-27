@@ -9,8 +9,8 @@ import java.util.NoSuchElementException;
  *
  * @param <E> - param.
  * @author Artur Glyzin.
- * @version 1.0.
- * @since 27.02.2019.
+ * @version 2.0.
+ * @since 28.02.2019.
  */
 
 public class MyLinkedList<E> implements Iterable<E> {
@@ -71,6 +71,32 @@ public class MyLinkedList<E> implements Iterable<E> {
             node = node.next;
         }
         return node.data;
+    }
+
+    /**
+     * Removes the last element in this list.
+     *
+     * @return the last element.
+     */
+
+    public E removeLast() {
+        Node<E> node = last;
+        if (node == null) {
+            throw new NoSuchElementException();
+        }
+        E element = node.data;
+        Node<E> prev = node.prev;
+        node.data = null;
+        node.prev = null;
+        last = prev;
+        if (last == null) {
+            first = null;
+        } else {
+            prev.next = null;
+        }
+        size--;
+        modCount++;
+        return element;
     }
 
     public int getSize() {
