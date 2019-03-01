@@ -134,7 +134,6 @@ public class MyLinkedList<E> implements Iterable<E> {
 
             lastEl = cursor;
             return (E) get(cursor++);
-
         }
 
         final void checkModification() {

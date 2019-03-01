@@ -80,4 +80,11 @@ public class MyLinkedListTest {
         assertThat(it.next(), is(111));
     }
 
+    @Test
+    public void whenCheckNextElement() {
+        Iterator<Integer> it = list.iterator();
+        assertThat(it.next(), is(24));
+        assertThat(it.next(), is(67));
+    }
+
 }
