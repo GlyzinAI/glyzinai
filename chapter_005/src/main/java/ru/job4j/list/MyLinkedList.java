@@ -99,6 +99,18 @@ public class MyLinkedList<E> implements Iterable<E> {
         return element;
     }
 
+    public E removeFirst() {
+        Node<E> node = first;
+        if (node == null) {
+            throw new NoSuchElementException();
+        }
+        E element = node.data;
+        first = node.next;
+        size--;
+        modCount++;
+        return element;
+    }
+
     public int getSize() {
         return size;
     }

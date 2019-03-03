@@ -7,13 +7,13 @@ import java.util.Iterator;
  *
  * @param <T> - param.
  * @author Artur Glyzin.
- * @version 1.0.
- * @since 28.02.2019.
+ * @version 2.0.
+ * @since 04.03.2019.
  */
 
 public class SimpleStack<T> implements Iterable<T> {
 
-    private MyLinkedList<T> list = new MyLinkedList<>();
+    protected MyLinkedList<T> list = new MyLinkedList<>();
 
     /**
      * Removes and returns the last element from this list.
