@@ -9,8 +9,8 @@ import java.util.NoSuchElementException;
  *
  * @param <E> - param.
  * @author Artur Glyzin.
- * @version 2.0.
- * @since 28.02.2019.
+ * @version 3.0.
+ * @since 03.03.2019.
  */
 
 public class MyLinkedList<E> implements Iterable<E> {
@@ -116,8 +116,8 @@ public class MyLinkedList<E> implements Iterable<E> {
 
     private class Itr<E> implements Iterator<E> {
         private int cursor;
-        private int lastEl = -1;
         private int expectedModCount = modCount;
+        private Node<E> node = (Node<E>) first;
 
 
         @Override
@@ -132,8 +132,10 @@ public class MyLinkedList<E> implements Iterable<E> {
                 throw new NoSuchElementException();
             }
 
-            lastEl = cursor;
-            return (E) get(cursor++);
+            E result = node.data;
+            node = node.next;
+            cursor++;
+            return result;
         }
 
         final void checkModification() {
