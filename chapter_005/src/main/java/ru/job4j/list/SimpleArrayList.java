@@ -12,7 +12,7 @@ package ru.job4j.list;
 public class SimpleArrayList<E> {
 
     /**
-     * Class Node - class for keep data.
+     * Class LoopLinkedList - class for keep data.
      *
      * @param <E> - param.
      */
