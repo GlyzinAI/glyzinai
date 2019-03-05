@@ -1,19 +1,22 @@
 package ru.job4j.list;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 /**
  * Class SimpleQueue - implementation Queue.
  *
  * @param <E> - param.
  * @author Artur Glyzin.
- * @version 1.0.
- * @since 04.03.2019.
+ * @version 2.0.
+ * @since 05.03.2019.
  */
 
 public class SimpleQueue<E> implements Iterable<E> {
 
-    private SimpleStack<E> stack = new SimpleStack<>();
+    private SimpleStack<E> inputStack = new SimpleStack<>();
+    private SimpleStack<E> outputSecond = new SimpleStack<>();
+    private int size;
 
     /**
      * Removes and returns the first element from this list.
@@ -22,7 +25,20 @@ public class SimpleQueue<E> implements Iterable<E> {
      */
 
     public E poll() {
-        return stack.list.removeFirst();
+        if (outputSecond.isEmpty()) {
+            while (!inputStack.isEmpty()) {
+                outputSecond.push(inputStack.poll());
+            }
+        }
+
+        E element = null;
+        if (!outputSecond.isEmpty()) {
+            element = outputSecond.poll();
+            size--;
+        } else {
+            throw new NoSuchElementException();
+        }
+        return element;
     }
 
     /**
@@ -32,7 +48,8 @@ public class SimpleQueue<E> implements Iterable<E> {
      */
 
     public void push(E value) {
-        stack.push(value);
+        inputStack.push(value);
+        size++;
     }
 
     /**
@@ -42,7 +59,7 @@ public class SimpleQueue<E> implements Iterable<E> {
      */
 
     public int size() {
-        return stack.size();
+        return this.size;
     }
 
     /**
@@ -53,6 +70,6 @@ public class SimpleQueue<E> implements Iterable<E> {
 
     @Override
     public Iterator<E> iterator() {
-        return stack.iterator();
+        return inputStack.iterator();
     }
 }

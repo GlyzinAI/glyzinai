@@ -13,7 +13,7 @@ import java.util.Iterator;
 
 public class SimpleStack<T> implements Iterable<T> {
 
-    protected MyLinkedList<T> list = new MyLinkedList<>();
+    private MyLinkedList<T> list = new MyLinkedList<>();
 
     /**
      * Removes and returns the last element from this list.
@@ -50,6 +50,10 @@ public class SimpleStack<T> implements Iterable<T> {
      *
      * @return iterator.
      */
+
+    public boolean isEmpty() {
+        return list.getSize() == 0;
+    }
 
     @Override
     public Iterator<T> iterator() {
