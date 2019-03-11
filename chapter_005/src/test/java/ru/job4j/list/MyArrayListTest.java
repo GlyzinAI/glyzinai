@@ -5,6 +5,7 @@ import org.junit.Test;
 
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 import static org.junit.Assert.*;
 import static org.hamcrest.core.Is.is;
@@ -13,8 +14,8 @@ import static org.hamcrest.core.Is.is;
  * Class MyArrayListTest - test for implementation ArrayList.
  *
  * @author Artur Glyzin.
- * @version 1.0.
- * @since 27.02.2019.
+ * @version 2.0.
+ * @since 11.03.2019.
  */
 
 public class MyArrayListTest {
@@ -91,5 +92,13 @@ public class MyArrayListTest {
         list.add(100);
         assertThat(it.hasNext(), is(true));
         assertThat(it.next(), is(3));
+    }
+
+
+    @Test(expected = NoSuchElementException.class)
+    public void whenCheckThrowException() {
+        list = new MyArrayList<>();
+        Iterator<Integer> it = list.iterator();
+        it.next();
     }
 }
