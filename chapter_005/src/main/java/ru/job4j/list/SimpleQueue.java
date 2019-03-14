@@ -8,14 +8,14 @@ import java.util.NoSuchElementException;
  *
  * @param <E> - param.
  * @author Artur Glyzin.
- * @version 2.0.
- * @since 05.03.2019.
+ * @version 3.0.
+ * @since 14.03.2019.
  */
 
 public class SimpleQueue<E> implements Iterable<E> {
 
     private SimpleStack<E> inputStack = new SimpleStack<>();
-    private SimpleStack<E> outputSecond = new SimpleStack<>();
+    private SimpleStack<E> outputStack = new SimpleStack<>();
     private int size;
 
     /**
@@ -25,15 +25,15 @@ public class SimpleQueue<E> implements Iterable<E> {
      */
 
     public E poll() {
-        if (outputSecond.isEmpty()) {
+        if (outputStack.isEmpty()) {
             while (!inputStack.isEmpty()) {
-                outputSecond.push(inputStack.poll());
+                outputStack.push(inputStack.poll());
             }
         }
 
         E element = null;
-        if (!outputSecond.isEmpty()) {
-            element = outputSecond.poll();
+        if (!outputStack.isEmpty()) {
+            element = outputStack.poll();
             size--;
         } else {
             throw new NoSuchElementException();
