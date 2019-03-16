@@ -14,7 +14,7 @@ import static org.hamcrest.core.Is.is;
  * Class UserTest - test model User.
  *
  * @author Artur Glyzin.
- * @version 1.0.
+ * @version 2.0.
  * @since 16.03.2019.
  */
 
@@ -30,5 +30,16 @@ public class UserTest {
         System.out.println(map);
         System.out.println("Hashcode user1 - " + first.hashCode());
         System.out.println("Hashcode user2 - " + second.hashCode());
+    }
+
+    @Test
+    public void outputMapOverrideMethods() {
+        User first = new User("Archi", 2, null);
+        User second = new User("Max", 2, null);
+        Map<User, Object> map = new HashMap<>();
+        map.put(first, "first");
+        map.put(second, "second");
+        assertThat(first.equals(second), is(false));
+
     }
 }
