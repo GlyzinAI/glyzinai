@@ -6,8 +6,8 @@ import java.util.Calendar;
  * Class User - model User.
  *
  * @author Artur Glyzin.
- * @version 1.0.
- * @since 16.03.2019.
+ * @version 2.0.
+ * @since 17.03.2019.
  */
 
 public class User {
@@ -59,5 +59,10 @@ public class User {
         result = 31 * result + children;
         result = 31 * result + (birthday != null ? birthday.hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" + "name='" + name + '\'' + ", children=" + children + ", birthday=" + birthday + '}';
     }
 }
