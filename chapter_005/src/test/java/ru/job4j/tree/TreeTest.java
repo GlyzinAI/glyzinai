@@ -14,8 +14,8 @@ import static org.hamcrest.Matchers.is;
  * TreeTest - test for Tree class.
  *
  * @author Artur Glyzin.
- * @version 1.0.
- * @since 23.03.2019.
+ * @version 2.0.
+ * @since 24.03.2019.
  */
 
 public class TreeTest {
@@ -82,5 +82,52 @@ public class TreeTest {
         assertThat(it.next(), is(2));
         tree.add(1, 8);
         assertThat(it.next(), is(3));
+    }
+
+    @Test
+    public void whenChildrenAmountIsThreeThenIsBinaryReturnsFalse() {
+        assertThat(this.tree.isBinary(), is(false));
+    }
+
+    @Test
+    public void whenChildrenAmountTwoOrLessThenIsBinaryReturnsTrue() {
+        tree = new Tree<>(0);
+        tree.add(0, 1);
+        tree.add(0, 2);
+        tree.add(1, 3);
+        tree.add(1, 4);
+        tree.add(2, 5);
+        tree.add(2, 6);
+        tree.add(4, 7);
+        tree.add(5, 8);
+        assertThat(tree.isBinary(), is(true));
+    }
+
+    @Test
+    public void whenChildrenAmountThreeThenIsBinaryReturnsFalse() {
+        tree = new Tree<>(5);
+        tree.add(5, 6);
+        tree.add(5, 7);
+        tree.add(6, 8);
+        tree.add(6, 9);
+        tree.add(6, 10);
+        tree.add(8, 11);
+        tree.add(9, 12);
+        assertThat(tree.isBinary(), is(false));
+    }
+
+    @Test
+    public void whenAddNewElementsTreeGetDuplicate() {
+        tree = new Tree<>(1);
+        tree.add(1, 2);
+        tree.add(1, 3);
+        tree.add(1, 3);
+        tree.add(2, 4);
+        tree.add(2, 4);
+        Iterator<Integer> it = tree.iterator();
+        assertThat(it.next(), is(1));
+        assertThat(it.next(), is(2));
+        assertThat(it.next(), is(3));
+        assertThat(it.next(), is(4));
     }
 }

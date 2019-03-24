@@ -6,8 +6,8 @@ import java.util.*;
  * Элементарная структура дерева.
  *
  * @author Artur Glyzin.
- * @version 1.0.
- * @since 23.03.2019.
+ * @version 2.0.
+ * @since 24.03.2019.
  */
 
 public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
@@ -43,7 +43,7 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
         boolean flag = false;
         Node<E> parentNode = findBy(parent).orElse(null);
         Node<E> childNode = new Node<>(child);
-        if (parentNode != null && !parentNode.leaves().contains(child)) {
+        if (parentNode != null && !parentNode.leaves().contains(childNode)) {
             parentNode.add(childNode);
             modCount++;
             flag = true;
@@ -76,13 +76,29 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
     }
 
     /**
+     * Проверяет является ли дерево бинарным (кол-во потомков каждого узла не превышает два).
+     *
+     * @return true or false.
+     */
+    public boolean isBinary() {
+        boolean flag = true;
+        Iterator<E> it = Tree.this.iterator();
+        while (it.hasNext()) {
+            E next = it.next();
+            Optional<Node<E>> node = findBy(next);
+            flag &= node.filter(n -> n.leaves().size() <= 2).isPresent();
+        }
+        return flag;
+    }
+
+    /**
      * Возвращает итератор для последовательного прохода в ширину по элементам дерева.
      *
      * @return итератор.
      */
     @Override
     public Iterator<E> iterator() {
-        return new Iterator<E>() {
+        return new Iterator<>() {
             private int expectedModCount = modCount;
             private Queue<Node<E>> queue = new LinkedList<>();
 
