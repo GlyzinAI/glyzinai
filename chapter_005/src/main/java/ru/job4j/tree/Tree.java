@@ -6,7 +6,7 @@ import java.util.*;
  * Элементарная структура дерева.
  *
  * @author Artur Glyzin.
- * @version 2.0.
+ * @version 3.0.
  * @since 24.03.2019.
  */
 
@@ -41,12 +41,11 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
     @Override
     public boolean add(E parent, E child) {
         boolean flag = false;
-        Node<E> parentNode = findBy(parent).orElse(null);
         Node<E> childNode = new Node<>(child);
-        if (parentNode != null && !parentNode.leaves().contains(childNode)) {
-            parentNode.add(childNode);
-            modCount++;
+        if (!findBy(child).isPresent()) {
+            findBy(parent).ifPresent(node -> node.add(childNode));
             flag = true;
+            modCount++;
         }
         return flag;
     }
@@ -83,10 +82,10 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
     public boolean isBinary() {
         boolean flag = true;
         Iterator<E> it = Tree.this.iterator();
-        while (it.hasNext()) {
+        while (it.hasNext() && flag) {
             E next = it.next();
             Optional<Node<E>> node = findBy(next);
-            flag &= node.filter(n -> n.leaves().size() <= 2).isPresent();
+            flag = node.filter(n -> n.leaves().size() <= 2).isPresent();
         }
         return flag;
     }

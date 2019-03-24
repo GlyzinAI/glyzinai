@@ -14,7 +14,7 @@ import static org.hamcrest.Matchers.is;
  * TreeTest - test for Tree class.
  *
  * @author Artur Glyzin.
- * @version 2.0.
+ * @version 3.0.
  * @since 24.03.2019.
  */
 
@@ -124,10 +124,13 @@ public class TreeTest {
         tree.add(1, 3);
         tree.add(2, 4);
         tree.add(2, 4);
+        tree.add(4, 1);
+        tree.add(4, 11);
         Iterator<Integer> it = tree.iterator();
         assertThat(it.next(), is(1));
         assertThat(it.next(), is(2));
         assertThat(it.next(), is(3));
         assertThat(it.next(), is(4));
+        assertThat(it.next(), is(11));
     }
 }
