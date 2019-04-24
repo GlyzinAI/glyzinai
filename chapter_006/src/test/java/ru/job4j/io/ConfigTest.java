@@ -3,14 +3,14 @@ package ru.job4j.io;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 /**
  * ConfigTest - test for Config.class
  *
  * @author Artur Glyzin.
- * @version 1.0.
- * @since 24.04.2019.
+ * @version 2.0.
+ * @since 25.04.2019.
  */
 
 public class ConfigTest {
@@ -23,7 +23,7 @@ public class ConfigTest {
 
     @Before
     public void setUp() {
-        config = new Config("C:/projects/app.properties");
+        config = new Config("./../app.properties");
         key1 = "hibernate.dialect";
         key2 = "hibernate.connection.url";
         key3 = "hibernate.connection.driver_class";
