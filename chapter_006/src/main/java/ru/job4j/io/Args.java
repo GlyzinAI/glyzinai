@@ -5,17 +5,17 @@ import java.util.List;
 
 public class Args {
     private String directory;
-    private String output;
     private List<String> ext = new ArrayList<>();
+    private String output;
 
     public Args(String[] args) {
         for (int i = 0; i < args.length; i++) {
-            if (args[i].equals("-d")) {
+            if ("-d".equals(args[i])) {
                 this.directory = args[++i];
-            } else if (args[i].equals("-o")) {
-                this.output = args[++i];
-            } else if (args[i].equals("-e")) {
+            } else if ("-e".equals(args[i])) {
                 this.ext.add(args[++i]);
+            } else if ("-o".equals(args[i])) {
+                this.output = args[++i];
             }
         }
     }
@@ -24,11 +24,11 @@ public class Args {
         return directory;
     }
 
-    public String getOutput() {
-        return output;
-    }
-
     public List<String> getExt() {
         return ext;
+    }
+
+    public String getOutput() {
+        return output;
     }
 }
