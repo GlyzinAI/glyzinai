@@ -28,7 +28,7 @@ public class ArchiveDir3 {
         try (FileOutputStream fos = new FileOutputStream(zipFile);
              ZipOutputStream zos = new ZipOutputStream(fos)) {
 
-            System.out.println("Ouput to Zip : " + zipFile);
+            System.out.println("Output to Zip : " + zipFile);
 
             for (String file : fileList) {
                 System.out.println("File Added : " + file);
