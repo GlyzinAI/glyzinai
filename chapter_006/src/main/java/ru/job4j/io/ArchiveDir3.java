@@ -60,6 +60,19 @@ public class ArchiveDir3 {
         }
     }
 
+    public void generateFile(File node) {
+        if (!node.isFile()) {
+            fileList.add(generateZipEntry(node.getAbsoluteFile().toString()));
+        }
+
+        if (node.isDirectory()) {
+            String[] subNote = node.list();
+            for (String fileName : subNote) {
+                generateFileList(new File(node, fileName));
+            }
+        }
+    }
+
     private String generateZipEntry(String file) {
         return file.substring(SOURCE_FOLDER.length() + 1, file.length());
     }
